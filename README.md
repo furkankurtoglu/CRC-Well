@@ -12,7 +12,7 @@ PhysiCell is a flexible open source framework for building agent-based multicell
 Visit http://MathCancer.org/blog for the latest tutorials and help. 
 
 **Notable recognition:**
-+ [2019 PLoS Computational Biology Research Prize for Public Impact](https://blogs.plos.org/biologue/2019/05/31/announcing-the-winners-of-the-2019-plos-computational-biology-research-prize/)
++ [2019 PLoS Computational Biology Research Prize for Public Impact](https://blogs.plos.org/biologue/2019/05/31/announcing-the-winners-of-the-2019-plos-computational-biology-research-prize/) 
 
 ### Key makefile rules:
 
