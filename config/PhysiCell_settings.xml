@@ -74,15 +74,15 @@
 
 <PhysiCell_settings version="devel-version">
 	<domain>
-		<x_min>-150</x_min>
-		<x_max>150</x_max>
-		<y_min>-200</y_min>
-		<y_max>200</y_max>
-		<z_min>-150</z_min>
-		<z_max>150</z_max>
-		<dx>20</dx>
-		<dy>20</dy>
-		<dz>20</dz>
+		<x_min>-2880</x_min>
+		<x_max>2880</x_max>
+		<y_min>-512</y_min>
+		<y_max>512</y_max>
+		<z_min>-2880</z_min>
+		<z_max>2880</z_max>
+		<dx>32</dx>
+		<dy>32</dy>
+		<dz>32</dz>
 		<use_2D>false</use_2D>
 	</domain>
 	
@@ -170,6 +170,10 @@
 		<organoid_cell_relative_adhesion type="double" units="dimensionless">0.05</organoid_cell_relative_adhesion>
 		<organoid_cell_apoptosis_rate type="double" units="1/min">0.0</organoid_cell_apoptosis_rate> 
 		<organoid_cell_relative_cycle_entry_rate type="double" units="dimensionless">0.1</organoid_cell_relative_cycle_entry_rate>
+        
+        
+        <fibroblast_apoptosis_rate type="double" units="1/min">0.0</fibroblast_apoptosis_rate>
+        <fibroblast_seeding type="bool" units="none">true</fibroblast_seeding>
 		
 	</user_parameters>
 	

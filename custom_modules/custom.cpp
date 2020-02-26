@@ -176,26 +176,26 @@ void create_cell_types( void )
 	
 	// make sure the new cell type has its own reference phenotype
 	
-	fibroblast.parameters.pReference_live_phenotype = &( fibro_cell.phenotype ); 
+	fibroblast.parameters.pReference_live_phenotype = &( fibroblast.phenotype ); 
 	// Set cell-cell adhesion to 5% of other cells 
 	//fibro_cell.phenotype.mechanics.cell_cell_adhesion_strength *= parameters.doubles( "fibroblast_relative_adhesion" );
 	
 	// Set apoptosis to zero 
 	fibroblast.phenotype.death.rates[apoptosis_model_index] = parameters.doubles( "fibroblast_apoptosis_rate" ); // 0.0; 
-	fibroblast.phenotype.cycle.data.transition_rate(i_Ki67_negative,i_Ki67_positive) = 0.0;
-	fibroblast.phenotype.cycle.data.transition_rate(i_Ki67_positive,i_Ki67_negative) = 0.0;
+	fibroblast.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.0;
+	fibroblast.phenotype.cycle.data.transition_rate(End_index,Start_index) = 0.0;
 	
 	fibroblast.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.0;
 	fibroblast.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
 	fibroblast.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
 	
-	fibroblast.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.0; 
-	fibroblast.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
-	fibroblast.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
+	//fibroblast.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.0; 
+	//fibroblast.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
+	//fibroblast.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
 	
-	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
-	fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
-	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
+	//fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
+	//fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
+	//fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
 	
 	// ---- END -- Fibroblast Cell Definitions -- END ---- //	
 	return; 
@@ -247,21 +247,21 @@ void setup_tissue( void )
 {
 	// create some cells near the origin
 	
-	Cell* pC;
+	Cell* pCell;
 
-	pC = create_cell(); 
-	pC->assign_position( 0.0, 0.0, 0.0 );
-
-	pC = create_cell(); 
-	pC->assign_position( -100.0, 0.0, 1.0 );
-	
-	pC = create_cell(); 
-	pC->assign_position( 0, 100.0, -7.0 );
-	
-	// now create a motile cell 
-	
-	pC = create_cell( motile_cell ); 
-	pC->assign_position( 15.0, -18.0, 3.0 );
+    if (parameters.bools("fibroblast_seeding"))
+        {
+            std::cout << "creating fibroblasts" << std::endl;
+		
+            for (int i= -2666; i<2666; i+=16.82)
+            {
+                for (int j= -2666; j<2666; j+=16.82)
+                {			
+                    pCell = create_cell(fibroblast);
+                    pCell->assign_position(i,-500,j);	
+                }
+            } 	
+        }
 
 	return; 
 }
@@ -272,7 +272,7 @@ std::vector<std::string> my_coloring_function( Cell* pCell )
 	
 	std::vector<std::string> output = false_cell_coloring_cytometry(pCell); 
 	
-	// if the cell is motile and not dead, paint it black 
+	// if the cell is cell and not dead, paint it black 
 	
 	if( pCell->phenotype.death.dead == false && 
 		pCell->type == 1 )
