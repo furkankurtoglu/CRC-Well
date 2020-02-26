@@ -1,4 +1,4 @@
-VERSION := $(shell grep . VERSION.txt | cut -f1 -d:)
+3DVERSION := $(shell grep . VERSION.txt | cut -f1 -d:)
 PROGRAM_NAME := project3D
 
 CC := g++

@@ -174,7 +174,30 @@ void create_cell_types( void )
 	fibroblast.type = 2; 
 	fibroblast.name = "fibroblast"; 
 	
+	// make sure the new cell type has its own reference phenotype
 	
+	fibroblast.parameters.pReference_live_phenotype = &( fibro_cell.phenotype ); 
+	// Set cell-cell adhesion to 5% of other cells 
+	//fibro_cell.phenotype.mechanics.cell_cell_adhesion_strength *= parameters.doubles( "fibroblast_relative_adhesion" );
+	
+	// Set apoptosis to zero 
+	fibroblast.phenotype.death.rates[apoptosis_model_index] = parameters.doubles( "fibroblast_apoptosis_rate" ); // 0.0; 
+	fibroblast.phenotype.cycle.data.transition_rate(i_Ki67_negative,i_Ki67_positive) = 0.0;
+	fibroblast.phenotype.cycle.data.transition_rate(i_Ki67_positive,i_Ki67_negative) = 0.0;
+	
+	fibroblast.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.0;
+	fibroblast.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
+	
+	fibroblast.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
+	
+	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
+	
+	// ---- END -- Fibroblast Cell Definitions -- END ---- //	
 	return; 
 }
 
