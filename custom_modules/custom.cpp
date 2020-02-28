@@ -262,6 +262,21 @@ void setup_tissue( void )
                 }
             } 	
         }
+	
+	if (parameters.bools("organoid_cell_seeding"))
+		{
+			std::cout << "creating organoid cells" << std::endl;
+			SeedRandom( parameters.ints("random_seed") ); // or specify a seed here
+			for (int i = 0; i < parameters.ints("organoid_cell_number"); i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
+			{
+				int x_pos, y_pos, z_pos; // correspond to positions on x, y, and z axes
+				x_pos = (rand() % 5333) - 2666; 
+				y_pos = (rand() % 961) - 480;
+				z_pos = (rand() % 5333) - 2666;
+				pCell = create_cell(organoid_cell);
+				pCell->assign_position(x_pos, y_pos, z_pos);
+			}
+		}	
 
 	return; 
 }
@@ -277,8 +292,8 @@ std::vector<std::string> my_coloring_function( Cell* pCell )
 	if( pCell->phenotype.death.dead == false && 
 		pCell->type == 1 )
 	{
-		 output[0] = "black"; 
-		 output[2] = "black"; 	
+		 output[0] = "red"; 
+		 output[2] = "red"; 	
 	}
 	
 	return output; 

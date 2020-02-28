@@ -170,8 +170,9 @@
 		<organoid_cell_relative_adhesion type="double" units="dimensionless">0.05</organoid_cell_relative_adhesion>
 		<organoid_cell_apoptosis_rate type="double" units="1/min">0.0</organoid_cell_apoptosis_rate> 
 		<organoid_cell_relative_cycle_entry_rate type="double" units="dimensionless">0.1</organoid_cell_relative_cycle_entry_rate>
-        
-        
+        <organoid_cell_seeding type="bool" units="none">true</organoid_cell_seeding>
+        <organoid_cell_number type="int" units="none">20</organoid_cell_number>
+		
         <fibroblast_apoptosis_rate type="double" units="1/min">0.0</fibroblast_apoptosis_rate>
         <fibroblast_seeding type="bool" units="none">true</fibroblast_seeding>
 		
