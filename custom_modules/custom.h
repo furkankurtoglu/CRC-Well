@@ -87,7 +87,7 @@ void setup_tissue( void );
 
 // set up the BioFVM microenvironment 
 void setup_microenvironment( void ); 
-
+void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt );
 // custom pathology coloring function 
 
 std::vector<std::string> my_coloring_function( Cell* );

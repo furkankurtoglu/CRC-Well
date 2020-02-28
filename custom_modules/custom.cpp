@@ -142,18 +142,21 @@ void create_cell_types( void )
 	// --------- Defining Organoid Cells -------- //
 	organoid_cell = cell_defaults; 
 	organoid_cell.type = 1; 
-	organoid_cell.name = "organoid tumor cell"; 
+	organoid_cell.name = "organoid cell"; 
 	
 	// make sure the new cell type has its own reference phenotyhpe
 	
 	organoid_cell.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
 	
-	// enable random motility 
-	organoid_cell.phenotype.motility.is_motile = true; 
-	organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
-	organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
-	organoid_cell.phenotype.motility.migration_bias = 0.0;// completely random 
+	organoid_cell.phenotype.motility.is_motile = false; 
+	// organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
+	// organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
+	// organoid_cell.phenotype.motility.migration_bias = 0.0;// completely random 
 	
+    organoid_cell.phenotype.molecular.sync_to_microenvironment( &microenvironment );
+    organoid_cell.functions.update_phenotype = tumor_energy_update_function;
+    
+    
 	// Set cell-cell adhesion to 5% of other cells 
 	organoid_cell.phenotype.mechanics.cell_cell_adhesion_strength *= 
 		parameters.doubles( "organoid_cell_relative_adhesion" ); // 0.05; 
@@ -162,9 +165,9 @@ void create_cell_types( void )
 	organoid_cell.phenotype.death.rates[apoptosis_model_index] = 
 		parameters.doubles( "organoid_cell_apoptosis_rate" ); // 0.0; 
 	
-	// Set proliferation to 10% of other cells. 
+	// Setting Proliferation
 	// 
-	organoid_cell.phenotype.cycle.data.transition_rate(Start_index,End_index) *= parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
+	organoid_cell.phenotype.cycle.data.transition_rate(Start_index,End_index) = parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
 		
 		
 		
@@ -280,6 +283,19 @@ void setup_tissue( void )
 
 	return; 
 }
+
+void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
+{
+	static int Start_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model);
+	static int End_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model );
+
+    double tr = phenotype.cycle.data.transition_rate( Start_index,End_index );
+    //std::cout << tr << std::endl;
+    
+	return;
+}
+
+
 
 std::vector<std::string> my_coloring_function( Cell* pCell )
 {
