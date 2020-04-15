@@ -84,6 +84,7 @@ extern Cell_Definition organoid_cell;
 
 void create_cell_types( void );
 void setup_tissue( void ); 
+void setup_1D_microenvironment( void );
 
 // set up the BioFVM microenvironment 
 void setup_microenvironment( void ); 

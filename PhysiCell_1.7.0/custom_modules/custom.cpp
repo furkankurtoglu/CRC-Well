@@ -244,6 +244,41 @@ void setup_microenvironment( void )
 	return; 
 }
 
+
+void setup_1D_microenvironment( void )
+{
+    Microenvironment coasrse_1D;
+    std::cout << "creating 1D microenvironment" << std::endl;
+    default_microenvironment_options.X_range = {-1000, 1000};
+    default_microenvironment_options.Y_range = {-10, 10};
+    default_microenvironment_options.simulate_2D = false;
+    
+    
+    // gradients needed for this example
+    
+    default_microenvironment_options.calculate_gradients = false;
+    
+    // let BioFVM use oxygen as the default
+    
+    default_microenvironment_options.use_oxygen_as_first_field = true;
+    
+    
+    default_microenvironment_options.outer_Dirichlet_conditions = false;
+    // default_microenvironment_options.Dirichlet_activation_vector[2] = false;
+    default_microenvironment_options.Dirichlet_condition_vector[0] = parameters.doubles("O2_Dirichlet_Condition");
+    default_microenvironment_options.Dirichlet_activation_vector[0] = false;
+    // default_microenvironment_options.Dirichlet_condition_vector[2] = 0.0;
+    
+    Microenvironment* pME = get_default_microenvironment();
+
+    
+    initialize_microenvironment();
+
+	return; 
+}
+
+
+
 void setup_tissue( void )
 {
 	// create some cells near the origin
@@ -251,7 +286,7 @@ void setup_tissue( void )
 	Cell* pCell;
     
     double cell_radius = cell_defaults.phenotype.geometry.radius; 
-    double initial_tumor_radius = 46;//46; // parameters.doubles("initial_tumor_radius");
+    double initial_tumor_radius = 46; // parameters.doubles("initial_tumor_radius");
     double number_of_organoid = 250; //parameters.doubles("number_of_organoid")
 
     if (parameters.bools("fibroblast_seeding"))
@@ -273,7 +308,7 @@ void setup_tissue( void )
 			for (int i = 0; i < number_of_organoid; i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
 			{
                 std::vector<std::vector<double>> positions = create_cell_sphere_positions(cell_radius,initial_tumor_radius); 
-                std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
+                //std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
                 // create organoid
                     double xrand = (rand() % 5333) - 2666;
                     double yrand = (rand() % 961) - 480;
