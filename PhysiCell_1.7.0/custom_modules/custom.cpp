@@ -286,8 +286,8 @@ void setup_tissue( void )
 	Cell* pCell;
     
     double cell_radius = cell_defaults.phenotype.geometry.radius; 
-    double initial_tumor_radius = 46; // parameters.doubles("initial_tumor_radius");
-    double number_of_organoid = 250; //parameters.doubles("number_of_organoid")
+    double initial_tumor_radius = 10; // parameters.doubles("initial_tumor_radius");
+    double number_of_organoid = 1; //parameters.doubles("number_of_organoid")
 
     if (parameters.bools("fibroblast_seeding"))
         {
@@ -310,15 +310,19 @@ void setup_tissue( void )
                 std::vector<std::vector<double>> positions = create_cell_sphere_positions(cell_radius,initial_tumor_radius); 
                 //std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
                 // create organoid
-                    double xrand = (rand() % 5333) - 2666;
-                    double yrand = (rand() % 961) - 480;
-                    double zrand = (rand() % 5333) - 2666;
+					SeedRandom();
+                    double xrand = (UniformRandom() * 5333) - 2666;
+					SeedRandom();
+                    double yrand = (UniformRandom() * 961) - 480;
+					SeedRandom();
+                    double zrand = (UniformRandom() * 5333) - 2666;
+					std::cout << "Random numbers: " << UniformRandom() << std::endl;
                 std::cout << positions.size() << std::endl;
-                for( int i=0; i < positions.size(); i++ )
+                for( int j=0; j < positions.size(); j++ )
                 {
-                    positions[i][0] += xrand;//(rand() % 5333) - 2666;
-                    positions[i][1] += yrand;//(rand() % 961) - 480;
-                    positions[i][2] += zrand;//(rand() % 5333) - 2666;
+                    positions[j][0] += xrand;//(rand() % 5333) - 2666;
+                    positions[j][1] += yrand;//(rand() % 961) - 480;
+                    positions[j][2] += zrand;//(rand() % 5333) - 2666;
                     pCell = create_cell(organoid_cell);
                     pCell->assign_position( positions[i] );
                     //std::cout << pCell->ID << std::endl;

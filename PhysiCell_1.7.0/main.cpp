@@ -107,7 +107,7 @@ int main( int argc, char* argv[] )
 	/* Microenvironment setup */ 
 	
 	setup_microenvironment(); // modify this in the custom code 
-	setup_1D_microenvironment();
+	// setup_1D_microenvironment();
     
 	/* PhysiCell setup */ 
  	
