@@ -75,10 +75,10 @@ int energy_vi;
 
 // These are for C
 // #define STATIC_RRC
-#include "rrc_api.h"
-#include "rrc_types.h"
+// #include "rrc_api.h"
+// #include "rrc_types.h"
 // #include "rrc_utilities.h"
-extern "C" rrc::RRHandle createRRInstance();
+// extern "C" rrc::RRHandle createRRInstance();
 
 #include <iostream>
 #include <iomanip>
@@ -265,7 +265,7 @@ void setup_microenvironment( void )
 }
 
 
-/* void setup_1D_microenvironment( void )
+void setup_1D_microenvironment( void )
 {
     Microenvironment coarse_well;
     std::cout << "SPOT 1" <<std::endl;
@@ -318,7 +318,7 @@ void setup_microenvironment( void )
       }
       std::cout << std::endl; 
 	return; 
-} */
+} 
 
 
 void setup_tissue( void )
@@ -504,8 +504,8 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
 	static int SBML_idx_energy = 2;
     static int SBML_idx_lactate = 3;
 
-	rrc::RRVectorPtr vptr;
-	rrc::RRCDataPtr result;
+	// rrc::RRVectorPtr vptr;
+	// rrc::RRCDataPtr result;
 
     // BioFVM indices
     static int i_Oxy = microenvironment.find_density_index( "oxygen" ); 
@@ -541,10 +541,10 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
     //vptr = rrc::getFloatingSpeciesConcentrations(pCell->phenotype.molecular.model_rr);
 	
     // Setting New Values to SBML
-    vptr->Data[SBML_idx_oxygen] = pCell->custom_data[i_Oxy_i];
-    vptr->Data[SBML_idx_glucose] = pCell->custom_data[i_Glu_i];
-    vptr->Data[SBML_idx_lactate] = pCell->custom_data[i_Lac_i];
-    vptr->Data[SBML_idx_energy] = pCell->custom_data[energy_vi];
+    // vptr->Data[SBML_idx_oxygen] = pCell->custom_data[i_Oxy_i];
+    // vptr->Data[SBML_idx_glucose] = pCell->custom_data[i_Glu_i];
+    // vptr->Data[SBML_idx_lactate] = pCell->custom_data[i_Lac_i];
+    // vptr->Data[SBML_idx_energy] = pCell->custom_data[energy_vi];
     
     //rrc::setFloatingSpeciesConcentrations(pCell->phenotype.molecular.model_rr, vptr);
     
@@ -575,11 +575,11 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
 
 
 
-    pCell->custom_data[i_Glu_i]  = result->Data[6];
-    pCell->custom_data[i_Oxy_i]  = result->Data[7];
-	pCell->custom_data[energy_vi]  = result->Data[8];
+    // pCell->custom_data[i_Glu_i]  = result->Data[6];
+    // pCell->custom_data[i_Oxy_i]  = result->Data[7];
+	// pCell->custom_data[energy_vi]  = result->Data[8];
     // std::cout << "Energy: " << pCell->custom_data[energy_vi] << std::endl;
-    pCell->custom_data[i_Lac_i] = result->Data[7];
+    // pCell->custom_data[i_Lac_i] = result->Data[7];
     
     
     phenotype.molecular.internalized_total_substrates[i_Glu] = pCell->custom_data[i_Glu_i]*cell_volume;

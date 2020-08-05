@@ -236,6 +236,7 @@ int main( int argc, char* argv[] )
             std::cout << coarse_well(n)[2] << " ";
             }
             std::cout << std::endl; 
+			// log_output( PhysiCell_globals.current_time , PhysiCell_globals.full_output_index, coarse_well, report_file); 
             // END ------  CMicEnv Saving --------- END //
 			}
 			
@@ -255,8 +256,8 @@ int main( int argc, char* argv[] )
 			// update the microenvironment
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
 
-            coarse_well.simulate_diffusion_decay( diffusion_dt );
-			
+            coarse_well.simulate_diffusion_decay( diffusion_dt ); 
+			std::cout << "where is the bug?" << std::endl;
 			// run PhysiCell 
 			((Cell_Container *)microenvironment.agent_container)->update_all_cells( PhysiCell_globals.current_time );
             //simulate_SBML_for_all_cells();

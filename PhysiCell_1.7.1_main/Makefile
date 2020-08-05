@@ -29,15 +29,16 @@ ARCH := native # best auto-tuning
 # ARCH := skylake-avx512
 # ARCH := nocona #64-bit pentium 4 or later 
 
-LIBRR_DIR := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m
-LIBRR_LIBS := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m\bin
+# LIBRR_DIR := C:\Kalis-MacBook-Pro\Library\Frameworks\Python.framework\Versions\3.7\lib\python3.7\site-packages\roadrunner
+# LIBRR_LIBS := C:\Kalis-MacBook-Pro\Library\Frameworks\Python.framework\Versions\3.7\lib\python3.7\site-packages\roadrunner\bin
 
-LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
+# LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
 
 # CFLAGS := -march=$(ARCH) -Ofast -s -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
 CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
 
-COMPILE_COMMAND := $(CC) $(CFLAGS) $(LIBRR_CFLAGS) 
+#COMPILE_COMMAND := $(CC) $(CFLAGS) $(LIBRR_CFLAGS) 
+COMPILE_COMMAND := $(CC) $(CFLAGS) 
 
 BioFVM_OBJECTS := BioFVM_vector.o BioFVM_mesh.o BioFVM_microenvironment.o BioFVM_solvers.o BioFVM_matlab.o \
 BioFVM_utilities.o BioFVM_basic_agent.o BioFVM_MultiCellDS.o BioFVM_agent_container.o 
