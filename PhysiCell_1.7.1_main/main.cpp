@@ -108,7 +108,7 @@ int main( int argc, char* argv[] )
 	
 	setup_microenvironment();
 	
-    // START -------- 1D Microenvironment ------------- START //
+/*     // START -------- 1D Microenvironment ------------- START //
     Microenvironment coarse_well;
     
     coarse_well.name = "coarse well";
@@ -133,7 +133,7 @@ int main( int argc, char* argv[] )
     coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
     coarse_well.diffusion_decay_solver = diffusion_decay_solver__constant_coefficients_LOD_1D;
     
-    coarse_well.display_information( std::cout );
+    coarse_well.display_information( std::cout ); */
     // END -------- 1D Microenvironment ------------- END //
     
     //setup_1D_microenvironment();
@@ -218,7 +218,7 @@ int main( int argc, char* argv[] )
 				PhysiCell_globals.next_full_save_time += PhysiCell_settings.full_save_interval;
                             
             // START ------  CMicEnv Saving --------- START //
-            std::cout << "oxygen concentrations:" << std::endl; 
+ /*            std::cout << "oxygen concentrations:" << std::endl; 
             for( int n = 0 ; n < coarse_well.mesh.voxels.size(); n++ )
             {
             std::cout << coarse_well(n)[0] << " ";
@@ -237,7 +237,7 @@ int main( int argc, char* argv[] )
             }
             std::cout << std::endl; 
 			//log_output( PhysiCell_globals.current_time , PhysiCell_globals.full_output_index, coarse_well, report_file);
-            coarse_well.write_to_matlab("coarse_microenv.mat");
+            coarse_well.write_to_matlab("coarse_microenv.mat"); */
             // END ------  CMicEnv Saving --------- END //
 			}
 			
@@ -257,7 +257,7 @@ int main( int argc, char* argv[] )
 			// update the microenvironment
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
 
-            coarse_well.simulate_diffusion_decay( diffusion_dt ); 
+            //coarse_well.simulate_diffusion_decay( diffusion_dt ); 
 			// std::cout << "where is the bug?" << std::endl;
 			// run PhysiCell 
 			((Cell_Container *)microenvironment.agent_container)->update_all_cells( PhysiCell_globals.current_time );
