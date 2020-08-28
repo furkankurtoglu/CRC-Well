@@ -247,7 +247,7 @@ int main( int argc, char* argv[] )
 
 			// update the microenvironment
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
-            //coarse_well.simulate_diffusion_decay( diffusion_dt ); 
+            coarse_well.simulate_diffusion_decay( diffusion_dt ); 
             
             //std::cout<< PhysiCell_globals.current_time << std::endl;;
             
@@ -262,15 +262,24 @@ int main( int argc, char* argv[] )
                         double cmic_cen = coarse_well.mesh.voxels[m].center[0];
                         if (cmic_cen == mic_cen)
                         {
-                           microenvironment(n)[0]=coarse_well(m)[0];
-                           microenvironment(n)[1]=coarse_well(m)[1];
-                           microenvironment(n)[2]=coarse_well(m)[2];
+                           microenvironment(n)[0]=coarse_well(m)[0]; //oxygen
+                           microenvironment(n)[1]=coarse_well(m)[1]; //glucose
+                           microenvironment(n)[2]=coarse_well(m)[2]; //lactate
                         }
                     }
                 }
             }
              */
-            
+             
+             // Start -------- Kali's Code
+             if
+                for( int n = 16; n < microenvironment.mesh.voxels.size() ; n++ )
+                {
+                    coarse_well(m)=value
+                }
+
+             // End -------- Kali's Code
+             
             
 			// std::cout << "where is the bug?" << std::endl;
 			// run PhysiCell 

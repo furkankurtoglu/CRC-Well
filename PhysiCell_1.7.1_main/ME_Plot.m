@@ -17,22 +17,22 @@ names={'Oxygen','Glucose','Lactate'};
 %%
 filename1="MicroEnv.gif";
 filename2="CMicroEnv.gif";
-%for i = 1:length(OutMatFiles)
-for i = 1:45
+for i = 1:length(OutMatFiles)
+% for i = 1:45
 
-    out = read_microenvironment(strcat(OutMatFiles{i}));
-    h = figure(1);
-    set(gcf, 'Position',  [0, 0, 5000, 4000])
-    plot_microenvironment(out,names)
-    frame = getframe(h);
-    im = frame2im(frame);
-    [imind,cm] = rgb2ind(im,256);
-    % Write to the GIF File
-    if i == 1
-        imwrite(imind,cm,filename1,'gif', 'Loopcount',inf);
-    else
-        imwrite(imind,cm,filename1,'gif','WriteMode','append');
-    end
+%     out = read_microenvironment(strcat(OutMatFiles{i}));
+%     h = figure(1);
+%     set(gcf, 'Position',  [0, 0, 5000, 4000])
+%     plot_microenvironment(out,names)
+%     frame = getframe(h);
+%     im = frame2im(frame);
+%     [imind,cm] = rgb2ind(im,256);
+%     % Write to the GIF File
+%     if i == 0
+%         imwrite(imind,cm,filename1,'gif', 'Loopcount',inf);
+%     else
+%         imwrite(imind,cm,filename1,'gif','WriteMode','append');
+%     end
 
     
     load(CMicEnvOutMatFiles{i,1});
@@ -51,13 +51,13 @@ for i = 1:45
     im = frame2im(frame);
     [imind,cm] = rgb2ind(im,256);
     % Write to the GIF File
-    if i == 1
-        imwrite(imind,cm,filename2,'gif', 'Loopcount',inf);
-    else
-        imwrite(imind,cm,filename2,'gif','WriteMode','append');
-    end
-    
+%     if i == 1
+%         imwrite(imind,cm,filename2,'gif', 'Loopcount',inf);
+%     else
+%         imwrite(imind,cm,filename2,'gif','WriteMode','append');
+%     end
+%     
     
 end 
 %%
-%for i = 1:length(CMicEnvOutMatFiles)
+cd ..
