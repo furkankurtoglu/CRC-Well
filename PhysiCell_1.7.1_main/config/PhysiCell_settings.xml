@@ -104,12 +104,12 @@
 		<folder>output</folder> <!-- use . for root --> 
 
 		<full_data>
-			<interval units="min">1</interval>
+			<interval units="min">120</interval>
 			<enable>true</enable>
 		</full_data>
 		
 		<SVG>
-			<interval units="min">1</interval>
+			<interval units="min">120</interval>
 			<enable>false</enable>
 		</SVG>
 		
@@ -179,7 +179,7 @@
         <initial_tumor_radius type="int" units="none">5000.0</initial_tumor_radius>
 		
         <fibroblast_apoptosis_rate type="double" units="1/min">0.0</fibroblast_apoptosis_rate>
-        <fibroblast_seeding type="bool" units="none">true</fibroblast_seeding>
+        <fibroblast_seeding type="bool" units="none">false</fibroblast_seeding>
 		
 	</user_parameters>
 	

@@ -108,8 +108,8 @@ int main( int argc, char* argv[] )
 	
 	setup_microenvironment();
 	
-/*     // START -------- 1D Microenvironment ------------- START //
-    Microenvironment coarse_well;
+    // START -------- 1D Microenvironment ------------- START //
+/*     Microenvironment coarse_well;
     
     coarse_well.name = "coarse well";
     coarse_well.spatial_units = "micron";
@@ -121,11 +121,11 @@ int main( int argc, char* argv[] )
     coarse_well.add_density( "lactate", "mmol", 1e5 , 0.0 );
     coarse_well.resize_space( 100, 1 , 1 );
     
-    double dx = 100;
-    coarse_well.resize_space_uniform( 0, 5000.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx );
-    std::vector<double> dirichlet_condition = { 1 , 1, 0 };
+    double dx = 32;
+    coarse_well.resize_space_uniform( -512.0, 9728.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx );
+    std::vector<double> dirichlet_condition = { 50 , 1, 0 };
     
-    int my_voxel_index = 0;
+    int my_voxel_index = 25;
     coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
 
     dirichlet_condition = { 0,0,0 };
@@ -133,7 +133,8 @@ int main( int argc, char* argv[] )
     coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
     coarse_well.diffusion_decay_solver = diffusion_decay_solver__constant_coefficients_LOD_1D;
     
-    coarse_well.display_information( std::cout ); */
+    coarse_well.display_information( std::cout );
+    coarse_well.write_to_matlab("output/output00000000_microenvironment1.mat"); */
     // END -------- 1D Microenvironment ------------- END //
     
     //setup_1D_microenvironment();
@@ -218,26 +219,16 @@ int main( int argc, char* argv[] )
 				PhysiCell_globals.next_full_save_time += PhysiCell_settings.full_save_interval;
                             
             // START ------  CMicEnv Saving --------- START //
- /*            std::cout << "oxygen concentrations:" << std::endl; 
+/*             std::cout << "oxygen concentrations:" << std::endl; 
             for( int n = 0 ; n < coarse_well.mesh.voxels.size(); n++ )
             {
             std::cout << coarse_well(n)[0] << " ";
             }
-            std::cout << std::endl; 
-            std::cout << "glucose concentrations:" << std::endl; 
-            for( int n = 0 ; n < coarse_well.mesh.voxels.size(); n++ )
-            {
-            std::cout << coarse_well(n)[1] << " ";
-            }
-            std::cout << std::endl; 
-            std::cout << "lactate concentrations:" << std::endl; 
-            for( int n = 0 ; n < coarse_well.mesh.voxels.size(); n++ )
-            {
-            std::cout << coarse_well(n)[2] << " ";
-            }
-            std::cout << std::endl; 
-			//log_output( PhysiCell_globals.current_time , PhysiCell_globals.full_output_index, coarse_well, report_file);
-            coarse_well.write_to_matlab("coarse_microenv.mat"); */
+            std::cout << std::endl; */
+
+            //sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
+            
+            //coarse_well.write_to_matlab(filename);
             // END ------  CMicEnv Saving --------- END //
 			}
 			
@@ -256,13 +247,37 @@ int main( int argc, char* argv[] )
 
 			// update the microenvironment
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
-
             //coarse_well.simulate_diffusion_decay( diffusion_dt ); 
+            
+            //std::cout<< PhysiCell_globals.current_time << std::endl;;
+            
+            // update the microenvironment according to coarse microenvironment
+/*             if (fabs( PhysiCell_globals.current_time - 2  ) < 0.0000000001)
+            {
+                for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
+                {
+                    double mic_cen = microenvironment.mesh.voxels[n].center[1];
+                    for ( int m = 0; m < coarse_well.mesh.voxels.size() ; m++)
+                    {
+                        double cmic_cen = coarse_well.mesh.voxels[m].center[0];
+                        if (cmic_cen == mic_cen)
+                        {
+                           microenvironment(n)[0]=coarse_well(m)[0];
+                           microenvironment(n)[1]=coarse_well(m)[1];
+                           microenvironment(n)[2]=coarse_well(m)[2];
+                        }
+                    }
+                }
+            }
+             */
+            
+            
 			// std::cout << "where is the bug?" << std::endl;
 			// run PhysiCell 
 			((Cell_Container *)microenvironment.agent_container)->update_all_cells( PhysiCell_globals.current_time );
             //simulate_SBML_for_all_cells();
 			
+            
 			/*
 			  Custom add-ons could potentially go here. 
 			*/			

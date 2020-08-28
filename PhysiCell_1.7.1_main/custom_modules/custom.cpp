@@ -139,6 +139,9 @@ void create_cell_types( void )
 	int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
 	int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
 	int oxygen_substrate_index = microenvironment.find_density_index( "oxygen" ); 
+ 	int glucose_substrate_index = microenvironment.find_density_index( "glucose" );
+  	int lactate_substrate_index = microenvironment.find_density_index( "lactate" );   
+
 
 	int Start_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model);
 	int End_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model );
@@ -151,9 +154,17 @@ void create_cell_types( void )
 
 
 	// set oxygen uptake / secretion parameters for the default cell type 
-	cell_defaults.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.0; 
+	cell_defaults.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 1.0; 
 	cell_defaults.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
 	cell_defaults.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
+    
+    cell_defaults.phenotype.secretion.uptake_rates[glucose_substrate_index] = 1.0; 
+	cell_defaults.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
+	cell_defaults.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
+    
+    cell_defaults.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
+	cell_defaults.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.1; 
+	cell_defaults.phenotype.secretion.saturation_densities[lactate_substrate_index] = 1.0; 
 	
 	// add custom data here, if any 
 	
@@ -167,7 +178,6 @@ void create_cell_types( void )
 	// make sure the new cell type has its own reference phenotyhpe
 	
 	organoid_cell.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
-	
 	organoid_cell.phenotype.motility.is_motile = false; 
 	// organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
 	// organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
@@ -185,7 +195,7 @@ void create_cell_types( void )
 	
 	// Setting Proliferation
 	// 
-	organoid_cell.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.025;//parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
+	organoid_cell.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.00021;//parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
 		
 		
 		
@@ -210,13 +220,13 @@ void create_cell_types( void )
 	fibroblast.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
 	fibroblast.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
 	
-	//fibroblast.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.0; 
-	//fibroblast.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
-	//fibroblast.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
 	
-	//fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
-	//fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
-	//fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
+	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
 	
 	// ---- END -- Fibroblast Cell Definitions -- END ---- //	
 	return; 
