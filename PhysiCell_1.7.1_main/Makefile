@@ -35,7 +35,7 @@ ARCH := native # best auto-tuning
 # LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
 
 # CFLAGS := -march=$(ARCH) -Ofast -s -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
-CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
+CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11 -g
 
 #COMPILE_COMMAND := $(CC) $(CFLAGS) $(LIBRR_CFLAGS) 
 COMPILE_COMMAND := $(CC) $(CFLAGS) 
