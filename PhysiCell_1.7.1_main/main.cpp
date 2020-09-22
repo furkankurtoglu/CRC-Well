@@ -109,7 +109,7 @@ int main( int argc, char* argv[] )
 	setup_microenvironment();
 	
     // START -------- 1D Microenvironment ------------- START //
-/*     Microenvironment coarse_well;
+    Microenvironment coarse_well;
     
     coarse_well.name = "coarse well";
     coarse_well.spatial_units = "micron";
@@ -123,18 +123,27 @@ int main( int argc, char* argv[] )
     
     double dx = 32;
     coarse_well.resize_space_uniform( -512.0, 9728.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx );
-    std::vector<double> dirichlet_condition = { 50 , 1, 0 };
+    std::vector<double> dirichlet_condition = { 1 , 0, 0 };
     
-    int my_voxel_index = 25;
+    int my_voxel_index = 319;
     coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
 
-    dirichlet_condition = { 0,0,0 };
+    dirichlet_condition = { 50,16.897255,0 };
     my_voxel_index = coarse_well.mesh.voxels.size()-1;
     coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
+    //corase_well.add_dirichlet_node( my_voxel_index, 0, 50);
     coarse_well.diffusion_decay_solver = diffusion_decay_solver__constant_coefficients_LOD_1D;
     
+    for ( int m = 0; m < coarse_well.mesh.voxels.size() ; m++)
+    {
+        coarse_well(m)[0]=38; // oxygen
+        coarse_well(m)[1]=16.897255; // glucose
+        coarse_well(m)[2]=0; // lactate
+        //std::cout<< "turned" << std::endl;
+    }
+    
     coarse_well.display_information( std::cout );
-    coarse_well.write_to_matlab("output/output00000000_microenvironment1.mat"); */
+    coarse_well.write_to_matlab("output/output00000000_microenvironment1.mat");
     // END -------- 1D Microenvironment ------------- END //
     
     //setup_1D_microenvironment();
@@ -226,9 +235,9 @@ int main( int argc, char* argv[] )
             }
             std::cout << std::endl; */
 
-            //sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
+            sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
             
-            //coarse_well.write_to_matlab(filename);
+            coarse_well.write_to_matlab(filename);
             // END ------  CMicEnv Saving --------- END //
 			}
 			
@@ -251,8 +260,9 @@ int main( int argc, char* argv[] )
             
             //std::cout<< PhysiCell_globals.current_time << std::endl;;
             
+            //int counter = 15;
             // update the microenvironment according to coarse microenvironment
-/*             if (fabs( PhysiCell_globals.current_time - 2  ) < 0.0000000001)
+            if (fabs( PhysiCell_globals.current_time - 15  ) < 0.0000000001)
             {
                 for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
                 {
@@ -262,21 +272,22 @@ int main( int argc, char* argv[] )
                         double cmic_cen = coarse_well.mesh.voxels[m].center[0];
                         if (cmic_cen == mic_cen)
                         {
-                           microenvironment(n)[0]=coarse_well(m)[0]; //oxygen
-                           microenvironment(n)[1]=coarse_well(m)[1]; //glucose
-                           microenvironment(n)[2]=coarse_well(m)[2]; //lactate
+                           microenvironment(n)[0]=coarse_well(m)[0]; // oxygen
+                           microenvironment(n)[1]=coarse_well(m)[1]; // glucose
+                           microenvironment(n)[2]=coarse_well(m)[2]; // lactate
+                           //counter+=15;
                         }
                     }
                 }
             }
-             */
-             
+            
+             //double value = 1.2;
              // Start -------- Kali's Code
-             if
+/*              if (fabs( PhysiCell_globals.current_time - 10  ) < 0.0000000001)
                 for( int n = 16; n < microenvironment.mesh.voxels.size() ; n++ )
                 {
-                    coarse_well(m)=value
-                }
+                    coarse_well(n)[0]=value;
+                } */
 
              // End -------- Kali's Code
              

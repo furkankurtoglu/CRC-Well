@@ -67,26 +67,22 @@
 
 #include "./custom.h"
 
-// declare cell definitions here 
-
-// int oxygen_i, glucose_i, energy_i; 
 int oxygen_i, glucose_i; 
 int energy_vi; 
 
-// These are for C
+/* // These are for C
 // #define STATIC_RRC
-// #include "rrc_api.h"
-// #include "rrc_types.h"
+#include "rrc_api.h"
+#include "rrc_types.h"
 // #include "rrc_utilities.h"
-// extern "C" rrc::RRHandle createRRInstance();
-
+extern "C" rrc::RRHandle createRRInstance();
+ */
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <sstream>
 // #include <vector>
 #include <string>
-
 
 
 Cell_Definition fibroblast; 
@@ -166,6 +162,10 @@ void create_cell_types( void )
 	cell_defaults.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.1; 
 	cell_defaults.phenotype.secretion.saturation_densities[lactate_substrate_index] = 1.0; 
 	
+    cell_defaults.custom_data.add_variable( "oxygen_i_conc" , "mmHg", 0.0 );
+    cell_defaults.custom_data.add_variable( "glucose_i_conc" , "mMolar", 0.0 );
+    cell_defaults.custom_data.add_variable( "lactate_i_conc" , "mMolar", 0.0 ); 
+    
 	// add custom data here, if any 
 	
 	
@@ -339,7 +339,7 @@ void setup_tissue( void )
     
     double cell_radius = cell_defaults.phenotype.geometry.radius; 
     double initial_tumor_radius = 46; // parameters.doubles("initial_tumor_radius");
-    double number_of_organoid = 250; //parameters.doubles("number_of_organoid")
+    double number_of_organoid = 1; //parameters.doubles("number_of_organoid")
     
     
     if (parameters.bools("fibroblast_seeding"))
@@ -397,18 +397,17 @@ void setup_tissue( void )
                     pCell = create_cell(organoid_cell);
                     pCell->assign_position( positions[i] );
                     
-                    /* // Adding SBML model to cells
+/*                     // Adding SBML model to cells
                     std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
-    rrc::RRHandle rrHandle = createRRInstance();
-    if (!rrc::loadSBML (rrHandle, "Toy_Intracellular_Model_for_ext.xml")) {
-        std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
-    // 	printf ("Error message: %s\n", getLastError());
-    // 	getchar ();
-    // 	exit (0);
-    }
-    //pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
-    //pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell */
-                    
+                    rrc::RRHandle rrHandle = createRRInstance();
+                    if (!rrc::loadSBML (rrHandle, "Toy_Intracellular_Model_for_ext.xml")) {
+                        std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                    // 	printf ("Error message: %s\n", getLastError());
+                    // 	getchar ();
+                    // 	exit (0);
+                    }
+                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell */
+                                    
                 }
 			}
 		}	
@@ -458,7 +457,6 @@ std::vector<std::vector<double>> create_cell_sphere_positions(double cell_radius
 	double z_spacing= cell_radius*sqrt(3);
 	
 	std::vector<double> tempPoint(3,0.0);
-	// std::vector<double> cylinder_center(3,0.0);
 	
 	for(double z=-sphere_radius;z<sphere_radius;z+=z_spacing, zc++)
 	{
@@ -508,6 +506,7 @@ void update_coarse_microenvironment(void)
 
 void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
 {   
+
     // SBML indices
 	static int SBML_idx_glucose = 0;
     static int SBML_idx_oxygen = 1;
@@ -533,17 +532,17 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
     double i_Glu_i = pCell->custom_data.find_variable_index( "glucose_i_conc" );
     double i_Lac_i = pCell->custom_data.find_variable_index( "lactate_i_conc" );
     double energy_vi = pCell->custom_data.find_variable_index( "energy" );
+
     double cell_volume = phenotype.volume.total;
-    
+
     // Calculating internal concentrations & Updating cell data
     pCell->custom_data[i_Oxy_i] = internal_oxygen / cell_volume;
     pCell->custom_data[i_Glu_i] = internal_glucose / cell_volume;
     pCell->custom_data[i_Lac_i] = internal_lactate / cell_volume;
     // ! NO Energy Update is required !
-    
     //std::cout <<  "Internal Oxygen Amount: " << internal_oxygen  << std::endl;
     //std::cout <<  "Internal Oxygen Concentration: " << pCell->custom_data[i_Oxy_i]  << std::endl;
-    
+
     std::cout <<  "Internal Glucose Amount: " << internal_glucose  << std::endl;
     std::cout <<  "Internal Glucose Concentration: " << pCell->custom_data[i_Glu_i]  << std::endl;
 
@@ -604,7 +603,7 @@ void simulate_SBML_for_all_cells(void)
 {
     for( int i=0; i < (*all_cells).size(); i++ )
     {
-        //std::cout << "simulate_SBML_for_all_cells test" << std::endl;
+        //std::cout << "simulating_SBML_for_all_cells test" << std::endl;
         simulate_SBML_for_cell((*all_cells)[i], (*all_cells)[i]->phenotype , 0.01);
     }
 } 
