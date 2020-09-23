@@ -71,7 +71,7 @@ int oxygen_i, glucose_i;
 int energy_vi; 
 
 // These are for C
-// #define STATIC_RRC
+//#define STATIC_RRC
 #include "rrc_api.h"
 #include "rrc_types.h"
 // #include "rrc_utilities.h"
@@ -400,7 +400,7 @@ void setup_tissue( void )
                     // Adding SBML model to cells
                     std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
                     rrc::RRHandle rrHandle = createRRInstance();
-                    if (!rrc::loadSBML (rrHandle, "Toy_Intracellular_Model_for_ext.xml")) {
+                    if (!rrc::loadSBML (rrHandle, "Toy_Intracellular_Model.xml")) {
                         std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
                     // 	printf ("Error message: %s\n", getLastError());
                     // 	getchar ();
