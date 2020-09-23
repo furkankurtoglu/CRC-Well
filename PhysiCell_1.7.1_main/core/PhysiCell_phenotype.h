@@ -77,6 +77,10 @@
 
 #include "../modules/PhysiCell_settings.h"
 
+// #include <sbml/SBMLTypes.h>
+#include "rrc_api.h"
+// #include "rrc_types.h"
+
 using namespace BioFVM; 
 
 namespace PhysiCell{
@@ -499,6 +503,9 @@ class Molecular
 		// total internalized substrate is transferred to the  
 		// predatory cell when ingested 
 		std::vector<double> fraction_transferred_when_ingested; 
+        
+        // Model_t *molecular_model;			// libSBML object (/usr/local/include/sbml/common/sbmlfwd.h)
+		rrc::RRHandle model_rr;
 		
 		/* prototyping / beta in 1.5.0 */ 
 		// Boolean, Integer, and Double parameters

@@ -32,8 +32,8 @@ ARCH := native # best auto-tuning
 # LIBRR_DIR := C:\Kalis-MacBook-Pro\Library\Frameworks\Python.framework\Versions\3.7\lib\python3.7\site-packages\roadrunner
 # LIBRR_LIBS := C:\Kalis-MacBook-Pro\Library\Frameworks\Python.framework\Versions\3.7\lib\python3.7\site-packages\roadrunner\bin
 
-#LIBRR_DIR := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m
-#LIBRR_LIBS := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m\bin
+LIBRR_DIR := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m
+LIBRR_LIBS := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m\bin
 
 LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
 

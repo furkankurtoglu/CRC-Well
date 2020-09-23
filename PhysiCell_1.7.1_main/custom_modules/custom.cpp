@@ -70,13 +70,13 @@
 int oxygen_i, glucose_i; 
 int energy_vi; 
 
-/* // These are for C
+// These are for C
 // #define STATIC_RRC
 #include "rrc_api.h"
 #include "rrc_types.h"
 // #include "rrc_utilities.h"
 extern "C" rrc::RRHandle createRRInstance();
- */
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -397,7 +397,7 @@ void setup_tissue( void )
                     pCell = create_cell(organoid_cell);
                     pCell->assign_position( positions[i] );
                     
-/*                     // Adding SBML model to cells
+                    // Adding SBML model to cells
                     std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
                     rrc::RRHandle rrHandle = createRRInstance();
                     if (!rrc::loadSBML (rrHandle, "Toy_Intracellular_Model_for_ext.xml")) {
@@ -406,7 +406,7 @@ void setup_tissue( void )
                     // 	getchar ();
                     // 	exit (0);
                     }
-                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell */
+                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
                                     
                 }
 			}
