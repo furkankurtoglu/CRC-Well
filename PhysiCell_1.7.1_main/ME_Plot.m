@@ -13,7 +13,7 @@ OutMatFiles = MatFiles(contains(MatFiles,'microenvironment0'));
 OutMatFiles(1) = [];
 OutMatFiles(1) = [];
 CMicEnvOutMatFiles = MatFiles(contains(MatFiles,'microenvironment1'));
-names={'Oxygen','Glucose','Lactate'};
+names={'Oxygen','Glucose','Glutamine,','Lactate'};
 Save_MicEnv = 'N';
 Save_CMicEnv = 'Y';
 
@@ -21,6 +21,8 @@ Save_CMicEnv = 'Y';
 filename1="MicroEnv.gif";
 filename2="CMicroEnv.gif";
 for i = 1:length(OutMatFiles)+1
+%for i = 1:1
+
     if (Save_MicEnv == 'Y')
     out = read_microenvironment(strcat(OutMatFiles{i}));
     h = figure(1);
@@ -40,17 +42,25 @@ for i = 1:length(OutMatFiles)+1
     
     if (Save_CMicEnv == 'Y')
     load(CMicEnvOutMatFiles{i,1});
+    centers=(multiscale_microenvironment(1,:));
     j=figure(2);
     set(gcf, 'Position',  [0, 0, 1344, 756])
     subplot(2,2,1);
-    plot(multiscale_microenvironment(5,:))
+    plot(centers,multiscale_microenvironment(5,:))
+    xlim([-500 10200])
     title('oxygen')
     subplot(2,2,2);
-    plot(multiscale_microenvironment(6,:))
+    plot(centers,multiscale_microenvironment(6,:))
+    xlim([-500 10200])
     title('glucose')
     subplot(2,2,3);
-    plot(multiscale_microenvironment(7,:))
-    title('lactate')
+    plot(centers,multiscale_microenvironment(7,:))
+    xlim([-500 10200])
+    title('glutamine')
+    subplot(2,2,4);
+    plot(centers,multiscale_microenvironment(8,:))
+    xlim([-500 10200])
+    title('lactate')    
     frame = getframe(j);
     im = frame2im(frame);
     [imind,cm] = rgb2ind(im,256);

@@ -63,7 +63,7 @@ ALL_OBJECTS := $(PhysiCell_OBJECTS) $(PhysiCell_custom_module_OBJECTS)
 # compile the project 
 
 all: main.cpp $(ALL_OBJECTS)
-	$(COMPILE_COMMAND) -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp 
+	$(COMPILE_COMMAND) -L${LIBRR_LIBS} -lroadrunner_c_api -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp 
 
 # PhysiCell core components	
 
@@ -167,7 +167,6 @@ clean:
 data-cleanup:
 	rm -f *.mat
     #    rm -f *.xml
-	rm -f *.xml
 	rm -f *.svg
 	rm -f ./output/*
 	touch ./output/empty.txt

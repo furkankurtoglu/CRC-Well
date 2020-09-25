@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- generated with COPASI 4.24 (Build 197) (http://www.copasi.org) at 2020-02-26 23:18:41 UTC -->
+<!-- generated with COPASI 4.24 (Build 197) (http://www.copasi.org) at 2020-09-24 13:15:45 UTC -->
 <?oxygen RNGSchema="http://www.copasi.org/static/schema/CopasiML.rng" type="xml"?>
 <COPASI xmlns="http://www.copasi.org/static/schema" versionMajor="4" versionMinor="24" versionDevel="197" copasiSourcesModified="0">
   <ListOfFunctions>
     <Function key="Function_13" name="Mass action (irreversible)" type="MassAction" reversible="false">
       <MiriamAnnotation>
-<rdf:RDF
-   xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#"
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<rdf:RDF xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about="#Function_13">
     <dcterms:created>
       <rdf:Description>
         <dcterms:W3CDTF>2020-02-26T17:30:34Z</dcterms:W3CDTF>
       </rdf:Description>
     </dcterms:created>
-    <CopasiMT:is rdf:resource="urn:miriam:obo.sbo:SBO:0000163"/>
+    <CopasiMT:is rdf:resource="urn:miriam:obo.sbo:SBO:0000163" />
   </rdf:Description>
 </rdf:RDF>
-
       </MiriamAnnotation>
       <Comment>
         <body xmlns="http://www.w3.org/1999/xhtml">
@@ -37,16 +33,16 @@ Reaction scheme where the products are created from the reactants and the change
       </ListOfParameterDescriptions>
     </Function>
   </ListOfFunctions>
-  <Model key="Model_1" name="New Model" simulationType="time" timeUnit="min" volumeUnit="µm³" areaUnit="µm²" lengthUnit="µm" quantityUnit="mmol" type="deterministic" avogadroConstant="6.0221408570000002e+23">
+  <Model key="Model_0" name="CAF_Toy_Model" simulationType="time" timeUnit="s" volumeUnit="ml" areaUnit="m²" lengthUnit="m" quantityUnit="mmol" type="deterministic" avogadroConstant="6.0221408570000002e+23">
     <MiriamAnnotation>
 <rdf:RDF
    xmlns:dcterms="http://purl.org/dc/terms/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#">
-  <rdf:Description rdf:about="#Model_1">
+  <rdf:Description rdf:about="#Model_0">
     <dcterms:created>
       <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:27:54Z</dcterms:W3CDTF>
+        <dcterms:W3CDTF>2020-09-24T02:04:20Z</dcterms:W3CDTF>
       </rdf:Description>
     </dcterms:created>
     <dcterms:creator>
@@ -60,7 +56,7 @@ Reaction scheme where the products are created from the reactants and the change
         </vCard:N>
         <vCard:ORG>
           <rdf:Description>
-            <vCard:Orgname>Indiana University</vCard:Orgname>
+            <vCard:Orgname>Indiana University, SICE</vCard:Orgname>
           </rdf:Description>
         </vCard:ORG>
       </rdf:Description>
@@ -74,131 +70,23 @@ Reaction scheme where the products are created from the reactants and the change
       </Compartment>
     </ListOfCompartments>
     <ListOfMetabolites>
-      <Metabolite key="Metabolite_3" name="Glucose" simulationType="reactions" compartment="Compartment_0" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Metabolite_3">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:54:34Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-      </Metabolite>
-      <Metabolite key="Metabolite_2" name="Oxygen" simulationType="reactions" compartment="Compartment_0" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Metabolite_2">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:28:58Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-      </Metabolite>
-      <Metabolite key="Metabolite_1" name="Energy" simulationType="reactions" compartment="Compartment_0" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Metabolite_1">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:54:35Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-      </Metabolite>
-      <Metabolite key="Metabolite_0" name="Lactate" simulationType="reactions" compartment="Compartment_0" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Metabolite_0">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T18:09:03Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
+      <Metabolite key="Metabolite_4" name="Lactate" simulationType="reactions" compartment="Compartment_0" addNoise="false">
       </Metabolite>
     </ListOfMetabolites>
     <ListOfModelValues>
-      <ModelValue key="ModelValue_6" name="k_aer" simulationType="fixed" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#ModelValue_6">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:36:18Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-      </ModelValue>
-      <ModelValue key="ModelValue_5" name="k_ane" simulationType="fixed" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#ModelValue_5">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:55:59Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-      </ModelValue>
-      <ModelValue key="ModelValue_4" name="k_usage" simulationType="fixed" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#ModelValue_4">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:56:03Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
+      <ModelValue key="ModelValue_3" name="k_lac" simulationType="fixed" addNoise="false">
       </ModelValue>
     </ListOfModelValues>
     <ListOfReactions>
-      <Reaction key="Reaction_2" name="Aerobic" reversible="false" fast="false" addNoise="false">
+      <Reaction key="Reaction_3" name="Lactate_Utilization" reversible="false" fast="false" addNoise="false">
         <MiriamAnnotation>
 <rdf:RDF
    xmlns:dcterms="http://purl.org/dc/terms/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Reaction_2">
+  <rdf:Description rdf:about="#Reaction_3">
     <dcterms:created>
       <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:29:30Z</dcterms:W3CDTF>
+        <dcterms:W3CDTF>2020-09-24T09:13:20Z</dcterms:W3CDTF>
       </rdf:Description>
     </dcterms:created>
   </rdf:Description>
@@ -206,158 +94,57 @@ Reaction scheme where the products are created from the reactants and the change
 
         </MiriamAnnotation>
         <ListOfSubstrates>
-          <Substrate metabolite="Metabolite_3" stoichiometry="1"/>
-          <Substrate metabolite="Metabolite_2" stoichiometry="1"/>
-        </ListOfSubstrates>
-        <ListOfProducts>
-          <Product metabolite="Metabolite_1" stoichiometry="38"/>
-        </ListOfProducts>
-        <ListOfConstants>
-          <Constant key="Parameter_5017" name="k1" value="0.5"/>
-        </ListOfConstants>
-        <KineticLaw function="Function_13" unitType="Default" scalingCompartment="CN=Root,Model=New Model,Vector=Compartments[Intracellular]">
-          <ListOfCallParameters>
-            <CallParameter functionParameter="FunctionParameter_80">
-              <SourceParameter reference="ModelValue_6"/>
-            </CallParameter>
-            <CallParameter functionParameter="FunctionParameter_81">
-              <SourceParameter reference="Metabolite_3"/>
-              <SourceParameter reference="Metabolite_2"/>
-            </CallParameter>
-          </ListOfCallParameters>
-        </KineticLaw>
-      </Reaction>
-      <Reaction key="Reaction_1" name="Anaerobic" reversible="false" fast="false" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Reaction_1">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:35:05Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-        <ListOfSubstrates>
-          <Substrate metabolite="Metabolite_3" stoichiometry="1"/>
-        </ListOfSubstrates>
-        <ListOfProducts>
-          <Product metabolite="Metabolite_1" stoichiometry="4"/>
-          <Product metabolite="Metabolite_0" stoichiometry="1"/>
-        </ListOfProducts>
-        <ListOfConstants>
-          <Constant key="Parameter_5114" name="k1" value="0.1"/>
-        </ListOfConstants>
-        <KineticLaw function="Function_13" unitType="Default" scalingCompartment="CN=Root,Model=New Model,Vector=Compartments[Intracellular]">
-          <ListOfCallParameters>
-            <CallParameter functionParameter="FunctionParameter_80">
-              <SourceParameter reference="ModelValue_5"/>
-            </CallParameter>
-            <CallParameter functionParameter="FunctionParameter_81">
-              <SourceParameter reference="Metabolite_3"/>
-            </CallParameter>
-          </ListOfCallParameters>
-        </KineticLaw>
-      </Reaction>
-      <Reaction key="Reaction_0" name="Energy_Usage" reversible="false" fast="false" addNoise="false">
-        <MiriamAnnotation>
-<rdf:RDF
-   xmlns:dcterms="http://purl.org/dc/terms/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <rdf:Description rdf:about="#Reaction_0">
-    <dcterms:created>
-      <rdf:Description>
-        <dcterms:W3CDTF>2020-02-26T17:35:09Z</dcterms:W3CDTF>
-      </rdf:Description>
-    </dcterms:created>
-  </rdf:Description>
-</rdf:RDF>
-
-        </MiriamAnnotation>
-        <ListOfSubstrates>
-          <Substrate metabolite="Metabolite_1" stoichiometry="1"/>
+          <Substrate metabolite="Metabolite_4" stoichiometry="1"/>
         </ListOfSubstrates>
         <ListOfConstants>
-          <Constant key="Parameter_5108" name="k1" value="0.4"/>
+          <Constant key="Parameter_4860" name="k1" value="0.1"/>
         </ListOfConstants>
-        <KineticLaw function="Function_13" unitType="Default" scalingCompartment="CN=Root,Model=New Model,Vector=Compartments[Intracellular]">
+        <KineticLaw function="Function_13" unitType="Default" scalingCompartment="CN=Root,Model=CAF_Toy_Model,Vector=Compartments[Intracellular]">
           <ListOfCallParameters>
             <CallParameter functionParameter="FunctionParameter_80">
-              <SourceParameter reference="ModelValue_4"/>
+              <SourceParameter reference="Parameter_4860"/>
             </CallParameter>
             <CallParameter functionParameter="FunctionParameter_81">
-              <SourceParameter reference="Metabolite_1"/>
+              <SourceParameter reference="Metabolite_4"/>
             </CallParameter>
           </ListOfCallParameters>
         </KineticLaw>
       </Reaction>
     </ListOfReactions>
-    <ListOfModelParameterSets activeSet="ModelParameterSet_1">
-      <ModelParameterSet key="ModelParameterSet_1" name="Initial State">
+    <ListOfModelParameterSets activeSet="ModelParameterSet_0">
+      <ModelParameterSet key="ModelParameterSet_0" name="Initial State">
         <ModelParameterGroup cn="String=Initial Time" type="Group">
-          <ModelParameter cn="CN=Root,Model=New Model" value="0" type="Model" simulationType="time"/>
+          <ModelParameter cn="CN=Root,Model=CAF_Toy_Model" value="0" type="Model" simulationType="time"/>
         </ModelParameterGroup>
         <ModelParameterGroup cn="String=Initial Compartment Sizes" type="Group">
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular]" value="1" type="Compartment" simulationType="fixed"/>
+          <ModelParameter cn="CN=Root,Model=CAF_Toy_Model,Vector=Compartments[Intracellular]" value="1" type="Compartment" simulationType="fixed"/>
         </ModelParameterGroup>
         <ModelParameterGroup cn="String=Initial Species Values" type="Group">
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Glucose]" value="1.2044281714000001e+22" type="Species" simulationType="reactions"/>
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Oxygen]" value="9.0332112855000007e+21" type="Species" simulationType="reactions"/>
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Energy]" value="0" type="Species" simulationType="reactions"/>
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Lactate]" value="0" type="Species" simulationType="reactions"/>
+          <ModelParameter cn="CN=Root,Model=CAF_Toy_Model,Vector=Compartments[Intracellular],Vector=Metabolites[Lactate]" value="3.0110704285000002e+22" type="Species" simulationType="reactions"/>
         </ModelParameterGroup>
         <ModelParameterGroup cn="String=Initial Global Quantities" type="Group">
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Values[k_aer]" value="0.5" type="ModelValue" simulationType="fixed"/>
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Values[k_ane]" value="0.10000000000000001" type="ModelValue" simulationType="fixed"/>
-          <ModelParameter cn="CN=Root,Model=New Model,Vector=Values[k_usage]" value="0.40000000000000002" type="ModelValue" simulationType="fixed"/>
+          <ModelParameter cn="CN=Root,Model=CAF_Toy_Model,Vector=Values[k_lac]" value="0" type="ModelValue" simulationType="fixed"/>
         </ModelParameterGroup>
         <ModelParameterGroup cn="String=Kinetic Parameters" type="Group">
-          <ModelParameterGroup cn="CN=Root,Model=New Model,Vector=Reactions[Aerobic]" type="Reaction">
-            <ModelParameter cn="CN=Root,Model=New Model,Vector=Reactions[Aerobic],ParameterGroup=Parameters,Parameter=k1" value="0.5" type="ReactionParameter" simulationType="assignment">
-              <InitialExpression>
-                &lt;CN=Root,Model=New Model,Vector=Values[k_aer],Reference=InitialValue>
-              </InitialExpression>
-            </ModelParameter>
-          </ModelParameterGroup>
-          <ModelParameterGroup cn="CN=Root,Model=New Model,Vector=Reactions[Anaerobic]" type="Reaction">
-            <ModelParameter cn="CN=Root,Model=New Model,Vector=Reactions[Anaerobic],ParameterGroup=Parameters,Parameter=k1" value="0.10000000000000001" type="ReactionParameter" simulationType="assignment">
-              <InitialExpression>
-                &lt;CN=Root,Model=New Model,Vector=Values[k_ane],Reference=InitialValue>
-              </InitialExpression>
-            </ModelParameter>
-          </ModelParameterGroup>
-          <ModelParameterGroup cn="CN=Root,Model=New Model,Vector=Reactions[Energy_Usage]" type="Reaction">
-            <ModelParameter cn="CN=Root,Model=New Model,Vector=Reactions[Energy_Usage],ParameterGroup=Parameters,Parameter=k1" value="0.40000000000000002" type="ReactionParameter" simulationType="assignment">
-              <InitialExpression>
-                &lt;CN=Root,Model=New Model,Vector=Values[k_usage],Reference=InitialValue>
-              </InitialExpression>
-            </ModelParameter>
+          <ModelParameterGroup cn="CN=Root,Model=CAF_Toy_Model,Vector=Reactions[Lactate_Utilization]" type="Reaction">
+            <ModelParameter cn="CN=Root,Model=CAF_Toy_Model,Vector=Reactions[Lactate_Utilization],ParameterGroup=Parameters,Parameter=k1" value="0.10000000000000001" type="ReactionParameter" simulationType="fixed"/>
           </ModelParameterGroup>
         </ModelParameterGroup>
       </ModelParameterSet>
     </ListOfModelParameterSets>
     <StateTemplate>
-      <StateTemplateVariable objectReference="Model_1"/>
-      <StateTemplateVariable objectReference="Metabolite_1"/>
-      <StateTemplateVariable objectReference="Metabolite_0"/>
-      <StateTemplateVariable objectReference="Metabolite_3"/>
-      <StateTemplateVariable objectReference="Metabolite_2"/>
+      <StateTemplateVariable objectReference="Model_0"/>
+      <StateTemplateVariable objectReference="Metabolite_4"/>
       <StateTemplateVariable objectReference="Compartment_0"/>
-      <StateTemplateVariable objectReference="ModelValue_6"/>
-      <StateTemplateVariable objectReference="ModelValue_5"/>
-      <StateTemplateVariable objectReference="ModelValue_4"/>
+      <StateTemplateVariable objectReference="ModelValue_3"/>
     </StateTemplate>
     <InitialState type="initialState">
-      0 0 0 1.2044281714000001e+22 9.0332112855000007e+21 1 0.5 0.10000000000000001 0.40000000000000002 
+      0 3.0110704285000002e+22 1 0 
     </InitialState>
   </Model>
   <ListOfTasks>
-    <Task key="Task_26" name="Steady-State" type="steadyState" scheduled="false" updateModel="false">
-      <Report reference="Report_17" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_12" name="Steady-State" type="steadyState" scheduled="false" updateModel="false">
+      <Report reference="Report_8" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="JacobianRequested" type="bool" value="1"/>
         <Parameter name="StabilityAnalysisRequested" type="bool" value="1"/>
@@ -374,12 +161,12 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Maximum duration for backward integration" type="unsignedFloat" value="1000000"/>
       </Method>
     </Task>
-    <Task key="Task_25" name="Time-Course" type="timeCourse" scheduled="false" updateModel="false">
+    <Task key="Task_11" name="Time-Course" type="timeCourse" scheduled="false" updateModel="false">
       <Problem>
         <Parameter name="AutomaticStepSize" type="bool" value="0"/>
-        <Parameter name="StepNumber" type="unsignedInteger" value="1000"/>
+        <Parameter name="StepNumber" type="unsignedInteger" value="100"/>
         <Parameter name="StepSize" type="float" value="0.01"/>
-        <Parameter name="Duration" type="float" value="10"/>
+        <Parameter name="Duration" type="float" value="1"/>
         <Parameter name="TimeSeriesRequested" type="bool" value="1"/>
         <Parameter name="OutputStartTime" type="float" value="0"/>
         <Parameter name="Output Event" type="bool" value="0"/>
@@ -393,7 +180,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Max Internal Step Size" type="unsignedFloat" value="0"/>
       </Method>
     </Task>
-    <Task key="Task_24" name="Scan" type="scan" scheduled="false" updateModel="false">
+    <Task key="Task_10" name="Scan" type="scan" scheduled="false" updateModel="false">
       <Problem>
         <Parameter name="Subtask" type="unsignedInteger" value="1"/>
         <ParameterGroup name="ScanItems">
@@ -404,15 +191,15 @@ Reaction scheme where the products are created from the reactants and the change
       <Method name="Scan Framework" type="ScanFramework">
       </Method>
     </Task>
-    <Task key="Task_23" name="Elementary Flux Modes" type="fluxMode" scheduled="false" updateModel="false">
-      <Report reference="Report_16" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_9" name="Elementary Flux Modes" type="fluxMode" scheduled="false" updateModel="false">
+      <Report reference="Report_7" target="" append="1" confirmOverwrite="1"/>
       <Problem>
       </Problem>
       <Method name="EFM Algorithm" type="EFMAlgorithm">
       </Method>
     </Task>
-    <Task key="Task_22" name="Optimization" type="optimization" scheduled="false" updateModel="false">
-      <Report reference="Report_15" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_8" name="Optimization" type="optimization" scheduled="false" updateModel="false">
+      <Report reference="Report_6" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="Subtask" type="cn" value="CN=Root,Vector=TaskList[Steady-State]"/>
         <ParameterText name="ObjectiveExpression" type="expression">
@@ -433,8 +220,8 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Seed" type="unsignedInteger" value="0"/>
       </Method>
     </Task>
-    <Task key="Task_21" name="Parameter Estimation" type="parameterFitting" scheduled="false" updateModel="false">
-      <Report reference="Report_14" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_7" name="Parameter Estimation" type="parameterFitting" scheduled="false" updateModel="false">
+      <Report reference="Report_5" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="Maximize" type="bool" value="0"/>
         <Parameter name="Randomize Start Values" type="bool" value="0"/>
@@ -462,10 +249,10 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Stop after # Stalled Generations" type="unsignedInteger" value="0"/>
       </Method>
     </Task>
-    <Task key="Task_20" name="Metabolic Control Analysis" type="metabolicControlAnalysis" scheduled="false" updateModel="false">
-      <Report reference="Report_13" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_6" name="Metabolic Control Analysis" type="metabolicControlAnalysis" scheduled="false" updateModel="false">
+      <Report reference="Report_4" target="" append="1" confirmOverwrite="1"/>
       <Problem>
-        <Parameter name="Steady-State" type="key" value="Task_26"/>
+        <Parameter name="Steady-State" type="key" value="Task_12"/>
       </Problem>
       <Method name="MCA Method (Reder)" type="MCAMethod(Reder)">
         <Parameter name="Modulation Factor" type="unsignedFloat" value="1.0000000000000001e-09"/>
@@ -473,8 +260,8 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Use Smallbone" type="bool" value="1"/>
       </Method>
     </Task>
-    <Task key="Task_19" name="Lyapunov Exponents" type="lyapunovExponents" scheduled="false" updateModel="false">
-      <Report reference="Report_12" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_5" name="Lyapunov Exponents" type="lyapunovExponents" scheduled="false" updateModel="false">
+      <Report reference="Report_3" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="ExponentNumber" type="unsignedInteger" value="3"/>
         <Parameter name="DivergenceRequested" type="bool" value="1"/>
@@ -488,8 +275,8 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Max Internal Steps" type="unsignedInteger" value="10000"/>
       </Method>
     </Task>
-    <Task key="Task_18" name="Time Scale Separation Analysis" type="timeScaleSeparationAnalysis" scheduled="false" updateModel="false">
-      <Report reference="Report_11" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_4" name="Time Scale Separation Analysis" type="timeScaleSeparationAnalysis" scheduled="false" updateModel="false">
+      <Report reference="Report_2" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="StepNumber" type="unsignedInteger" value="100"/>
         <Parameter name="StepSize" type="float" value="0.01"/>
@@ -501,8 +288,8 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Deuflhard Tolerance" type="unsignedFloat" value="0.0001"/>
       </Method>
     </Task>
-    <Task key="Task_17" name="Sensitivities" type="sensitivities" scheduled="false" updateModel="false">
-      <Report reference="Report_10" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_3" name="Sensitivities" type="sensitivities" scheduled="false" updateModel="false">
+      <Report reference="Report_1" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="SubtaskType" type="unsignedInteger" value="1"/>
         <ParameterGroup name="TargetFunctions">
@@ -525,13 +312,13 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Delta minimum" type="unsignedFloat" value="9.9999999999999998e-13"/>
       </Method>
     </Task>
-    <Task key="Task_16" name="Moieties" type="moieties" scheduled="false" updateModel="false">
+    <Task key="Task_2" name="Moieties" type="moieties" scheduled="false" updateModel="false">
       <Problem>
       </Problem>
       <Method name="Householder Reduction" type="Householder">
       </Method>
     </Task>
-    <Task key="Task_15" name="Cross Section" type="crosssection" scheduled="false" updateModel="false">
+    <Task key="Task_1" name="Cross Section" type="crosssection" scheduled="false" updateModel="false">
       <Problem>
         <Parameter name="AutomaticStepSize" type="bool" value="0"/>
         <Parameter name="StepNumber" type="unsignedInteger" value="100"/>
@@ -565,8 +352,8 @@ Reaction scheme where the products are created from the reactants and the change
         <Parameter name="Max Internal Step Size" type="unsignedFloat" value="0"/>
       </Method>
     </Task>
-    <Task key="Task_27" name="Linear Noise Approximation" type="linearNoiseApproximation" scheduled="false" updateModel="false">
-      <Report reference="Report_9" target="" append="1" confirmOverwrite="1"/>
+    <Task key="Task_13" name="Linear Noise Approximation" type="linearNoiseApproximation" scheduled="false" updateModel="false">
+      <Report reference="Report_0" target="" append="1" confirmOverwrite="1"/>
       <Problem>
         <Parameter name="Steady-State" type="key" value=""/>
       </Problem>
@@ -575,7 +362,7 @@ Reaction scheme where the products are created from the reactants and the change
     </Task>
   </ListOfTasks>
   <ListOfReports>
-    <Report key="Report_17" name="Steady-State" taskType="steadyState" separator="&#x09;" precision="6">
+    <Report key="Report_8" name="Steady-State" taskType="steadyState" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -583,7 +370,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Steady-State]"/>
       </Footer>
     </Report>
-    <Report key="Report_16" name="Elementary Flux Modes" taskType="fluxMode" separator="&#x09;" precision="6">
+    <Report key="Report_7" name="Elementary Flux Modes" taskType="fluxMode" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -591,7 +378,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Elementary Flux Modes],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_15" name="Optimization" taskType="optimization" separator="&#x09;" precision="6">
+    <Report key="Report_6" name="Optimization" taskType="optimization" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -615,7 +402,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Optimization],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_14" name="Parameter Estimation" taskType="parameterFitting" separator="&#x09;" precision="6">
+    <Report key="Report_5" name="Parameter Estimation" taskType="parameterFitting" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -639,7 +426,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Parameter Estimation],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_13" name="Metabolic Control Analysis" taskType="metabolicControlAnalysis" separator="&#x09;" precision="6">
+    <Report key="Report_4" name="Metabolic Control Analysis" taskType="metabolicControlAnalysis" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -651,7 +438,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Metabolic Control Analysis],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_12" name="Lyapunov Exponents" taskType="lyapunovExponents" separator="&#x09;" precision="6">
+    <Report key="Report_3" name="Lyapunov Exponents" taskType="lyapunovExponents" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -663,7 +450,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Lyapunov Exponents],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_11" name="Time Scale Separation Analysis" taskType="timeScaleSeparationAnalysis" separator="&#x09;" precision="6">
+    <Report key="Report_2" name="Time Scale Separation Analysis" taskType="timeScaleSeparationAnalysis" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -675,7 +462,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Time Scale Separation Analysis],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_10" name="Sensitivities" taskType="sensitivities" separator="&#x09;" precision="6">
+    <Report key="Report_1" name="Sensitivities" taskType="sensitivities" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -687,7 +474,7 @@ Reaction scheme where the products are created from the reactants and the change
         <Object cn="CN=Root,Vector=TaskList[Sensitivities],Object=Result"/>
       </Footer>
     </Report>
-    <Report key="Report_9" name="Linear Noise Approximation" taskType="linearNoiseApproximation" separator="&#x09;" precision="6">
+    <Report key="Report_0" name="Linear Noise Approximation" taskType="linearNoiseApproximation" separator="&#x09;" precision="6">
       <Comment>
         Automatically generated report.
       </Comment>
@@ -705,42 +492,6 @@ Reaction scheme where the products are created from the reactants and the change
       <Parameter name="log X" type="bool" value="0"/>
       <Parameter name="log Y" type="bool" value="0"/>
       <ListOfPlotItems>
-        <PlotItem name="[Glucose]" type="Curve2D">
-          <Parameter name="Line type" type="unsignedInteger" value="0"/>
-          <Parameter name="Line subtype" type="unsignedInteger" value="0"/>
-          <Parameter name="Line width" type="unsignedFloat" value="1"/>
-          <Parameter name="Symbol subtype" type="unsignedInteger" value="0"/>
-          <Parameter name="Color" type="string" value="auto"/>
-          <Parameter name="Recording Activity" type="string" value="during"/>
-          <ListOfChannels>
-            <ChannelSpec cn="CN=Root,Model=New Model,Reference=Time"/>
-            <ChannelSpec cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Glucose],Reference=Concentration"/>
-          </ListOfChannels>
-        </PlotItem>
-        <PlotItem name="[Oxygen]" type="Curve2D">
-          <Parameter name="Line type" type="unsignedInteger" value="0"/>
-          <Parameter name="Line subtype" type="unsignedInteger" value="0"/>
-          <Parameter name="Line width" type="unsignedFloat" value="1"/>
-          <Parameter name="Symbol subtype" type="unsignedInteger" value="0"/>
-          <Parameter name="Color" type="string" value="auto"/>
-          <Parameter name="Recording Activity" type="string" value="during"/>
-          <ListOfChannels>
-            <ChannelSpec cn="CN=Root,Model=New Model,Reference=Time"/>
-            <ChannelSpec cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Oxygen],Reference=Concentration"/>
-          </ListOfChannels>
-        </PlotItem>
-        <PlotItem name="[Energy]" type="Curve2D">
-          <Parameter name="Line type" type="unsignedInteger" value="0"/>
-          <Parameter name="Line subtype" type="unsignedInteger" value="0"/>
-          <Parameter name="Line width" type="unsignedFloat" value="1"/>
-          <Parameter name="Symbol subtype" type="unsignedInteger" value="0"/>
-          <Parameter name="Color" type="string" value="auto"/>
-          <Parameter name="Recording Activity" type="string" value="during"/>
-          <ListOfChannels>
-            <ChannelSpec cn="CN=Root,Model=New Model,Reference=Time"/>
-            <ChannelSpec cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Energy],Reference=Concentration"/>
-          </ListOfChannels>
-        </PlotItem>
         <PlotItem name="[Lactate]" type="Curve2D">
           <Parameter name="Line type" type="unsignedInteger" value="0"/>
           <Parameter name="Line subtype" type="unsignedInteger" value="0"/>
@@ -749,8 +500,8 @@ Reaction scheme where the products are created from the reactants and the change
           <Parameter name="Color" type="string" value="auto"/>
           <Parameter name="Recording Activity" type="string" value="during"/>
           <ListOfChannels>
-            <ChannelSpec cn="CN=Root,Model=New Model,Reference=Time"/>
-            <ChannelSpec cn="CN=Root,Model=New Model,Vector=Compartments[Intracellular],Vector=Metabolites[Lactate],Reference=Concentration"/>
+            <ChannelSpec cn="CN=Root,Model=CAF_Toy_Model,Reference=Time"/>
+            <ChannelSpec cn="CN=Root,Model=CAF_Toy_Model,Vector=Compartments[Intracellular],Vector=Metabolites[Lactate],Reference=Concentration"/>
           </ListOfChannels>
         </PlotItem>
       </ListOfPlotItems>
@@ -758,18 +509,11 @@ Reaction scheme where the products are created from the reactants and the change
   </ListOfPlots>
   <GUI>
   </GUI>
-  <SBMLReference file="Toy_Intracellular_Model.xml">
-    <SBMLMap SBMLid="Aerobic" COPASIkey="Reaction_2"/>
-    <SBMLMap SBMLid="Anaerobic" COPASIkey="Reaction_1"/>
-    <SBMLMap SBMLid="Energy" COPASIkey="Metabolite_1"/>
-    <SBMLMap SBMLid="Energy_Usage" COPASIkey="Reaction_0"/>
-    <SBMLMap SBMLid="Glucose" COPASIkey="Metabolite_3"/>
+  <SBMLReference file="CAF_Toy_Model.xml">
     <SBMLMap SBMLid="Intracellular" COPASIkey="Compartment_0"/>
-    <SBMLMap SBMLid="Lactate" COPASIkey="Metabolite_0"/>
-    <SBMLMap SBMLid="Oxygen" COPASIkey="Metabolite_2"/>
-    <SBMLMap SBMLid="k_aer" COPASIkey="ModelValue_6"/>
-    <SBMLMap SBMLid="k_ane" COPASIkey="ModelValue_5"/>
-    <SBMLMap SBMLid="k_usage" COPASIkey="ModelValue_4"/>
+    <SBMLMap SBMLid="Lactate" COPASIkey="Metabolite_4"/>
+    <SBMLMap SBMLid="Lactate_Utilization" COPASIkey="Reaction_3"/>
+    <SBMLMap SBMLid="k_lac" COPASIkey="ModelValue_3"/>
   </SBMLReference>
   <ListOfUnitDefinitions>
     <UnitDefinition key="Unit_0" name="meter" symbol="m">
@@ -792,14 +536,14 @@ Reaction scheme where the products are created from the reactants and the change
         #
       </Expression>
     </UnitDefinition>
+    <UnitDefinition key="Unit_17" name="liter" symbol="l">
+      <Expression>
+        0.001*m^3
+      </Expression>
+    </UnitDefinition>
     <UnitDefinition key="Unit_20" name="mole" symbol="mol">
       <Expression>
         Avogadro*#
-      </Expression>
-    </UnitDefinition>
-    <UnitDefinition key="Unit_32" name="minute" symbol="min">
-      <Expression>
-        60*s
       </Expression>
     </UnitDefinition>
   </ListOfUnitDefinitions>
