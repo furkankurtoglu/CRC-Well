@@ -441,7 +441,7 @@ void setup_tissue( void )
                     pCell->assign_position( positions[i] );
                     
                     // Adding SBML model to cells
-                    //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+/*                     //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
                     rrc::RRHandle rrHandle = createRRInstance();
                     if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
                         std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
@@ -449,7 +449,7 @@ void setup_tissue( void )
                     // 	getchar ();
                     // 	exit (0);
                     }
-                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
+                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell */
                 }
 			}
 		}	

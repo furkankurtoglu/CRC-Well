@@ -110,7 +110,7 @@ int main( int argc, char* argv[] )
 	
     // START -------- 1D Microenvironment ------------- START //
     
-    Microenvironment coarse_well;
+/*     Microenvironment coarse_well;
     Microenvironment old_coarse_well;
     Microenvironment new_coarse_well;
     
@@ -161,7 +161,7 @@ int main( int argc, char* argv[] )
        microenvironment(n)[2]=coarse_well(n)[2]; // glutamine
        microenvironment(n)[3]=coarse_well(n)[3]; // lactate
     }    
-    
+     */
     //setup_1D_microenvironment();
     //update_coarse_microenvironment();
     
@@ -267,9 +267,9 @@ int main( int argc, char* argv[] )
                 }
                 std::cout << std::endl; */
 
-                sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
+                /* sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
                 
-                coarse_well.write_to_matlab(filename);
+                coarse_well.write_to_matlab(filename); */
                 // END ------  CMicEnv Saving --------- END //
 
 			}
@@ -291,7 +291,7 @@ int main( int argc, char* argv[] )
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
             
             //Coarsening          
-            if (fabs( PhysiCell_globals.current_time - 4  ) < 0.0000000001)
+/*             if (fabs( PhysiCell_globals.current_time - 4  ) < 0.0000000001)
             {
             for( int n = -496; n < 497 ; n = n + 32 )////////
             {
@@ -326,7 +326,7 @@ int main( int argc, char* argv[] )
             }
             
 
-            coarse_well.simulate_diffusion_decay( diffusion_dt ); 
+            coarse_well.simulate_diffusion_decay( diffusion_dt );  */
 
 
 
