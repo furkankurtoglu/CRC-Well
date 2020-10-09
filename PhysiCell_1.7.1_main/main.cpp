@@ -127,7 +127,7 @@ int main( int argc, char* argv[] )
     
     double dx = 32;
     coarse_well.resize_space_uniform( -512.0, 10208.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx );
-    std::vector<double> dirichlet_condition = { 50 , 0, 0, 0 };
+    std::vector<double> dirichlet_condition = { 38 , 0, 0, 0 };
     
     int my_voxel_index = 319;
     coarse_well.set_substrate_dirichlet_activation(1,false);
@@ -137,14 +137,13 @@ int main( int argc, char* argv[] )
     
     my_voxel_index = coarse_well.mesh.voxels.size()-1;
     coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
-    //corase_well.add_dirichlet_node( my_voxel_index, 0, 50);
     coarse_well.diffusion_decay_solver = diffusion_decay_solver__constant_coefficients_LOD_1D;
     
     for ( int m = 0; m < coarse_well.mesh.voxels.size() ; m++)
     {
         coarse_well(m)[0]=38; // oxygen
         coarse_well(m)[1]=16.897255; // glucose
-        coarse_well(m)[2]=1;
+        coarse_well(m)[2]=5.40;
         coarse_well(m)[3]=0; // lactate
         //std::cout<< "turned" << std::endl;
     }
@@ -183,7 +182,7 @@ int main( int argc, char* argv[] )
 	// set MultiCellDS save options 
 
 	set_save_biofvm_mesh_as_matlab( true ); 
-	set_save_biofvm_data_as_matlab( true ); 
+	set_save_biofvm_data_as_matlab( true );   
 	set_save_biofvm_cell_data( true ); 
 	set_save_biofvm_cell_data_as_custom_matlab( true );
 	
@@ -268,9 +267,9 @@ int main( int argc, char* argv[] )
                 }
                 std::cout << std::endl; */
 
-                //sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
+                sprintf( filename , "%s/output%08u_microenvironment1.mat" , PhysiCell_settings.folder.c_str(),  PhysiCell_globals.full_output_index );      
                 
-                //coarse_well.write_to_matlab(filename);
+                coarse_well.write_to_matlab(filename);
                 // END ------  CMicEnv Saving --------- END //
 
 			}
@@ -290,29 +289,49 @@ int main( int argc, char* argv[] )
             
 			// update the microenvironment
 			microenvironment.simulate_diffusion_decay( diffusion_dt );
-
-            //Coarsening
-/*             for( int n = 0; n < microenvironment.mesh.voxels.size() ; n++ )
+            
+            //Coarsening          
+            if (fabs( PhysiCell_globals.current_time - 4  ) < 0.0000000001)
             {
-                double mic_cen = microenvironment.mesh.voxels[n].center[1];
-                for ( int m = 0; m < coarse_well.mesh.voxels.size() ; m++)
+            for( int n = -496; n < 497 ; n = n + 32 )////////
+            {
+                std::vector<double> v = {0, 0, 0, 0};
+                for ( int m = 0; m < microenvironment.mesh.voxels.size() ; m++)
                 {
-                    double cmic_cen = coarse_well.mesh.voxels[m].center[0];
-                    if (cmic_cen == mic_cen)
+                    double mic_cen_y = microenvironment.mesh.voxels[m].center[1];
+                    if (mic_cen_y == n)
                     {
-                       coarse_well(m)[0]=microenvironment(n)[0]; // oxygen
-                       coarse_well(m)[1]=microenvironment(n)[1]; // glucose
-                       coarse_well(m)[2]=microenvironment(n)[2]; // glutamine
-                       coarse_well(m)[3]=microenvironment(n)[3]; // lactate
+                        v[0]+=microenvironment(m)[0]*microenvironment.mesh.voxels[m].volume;
+                        v[1]+=microenvironment(m)[1]*microenvironment.mesh.voxels[m].volume;
+                        v[2]+=microenvironment(m)[2]*microenvironment.mesh.voxels[m].volume;
+                        v[3]+=microenvironment(m)[3]*microenvironment.mesh.voxels[m].volume;
                     }
                 }
-            } */
+                //std::cout << v[0] << std::endl;
+                v[0]=v[0]/coarse_well.mesh.voxels[1].volume;
+                v[1]=v[2]/coarse_well.mesh.voxels[1].volume;
+                v[2]=v[2]/coarse_well.mesh.voxels[1].volume;
+                v[2]=v[2]/coarse_well.mesh.voxels[1].volume;
+                //std::cout << v[0] << std::endl;
+                
+                for ( int m = 0; m < 32 ; m++)
+                {
+                    coarse_well(m)[0]=v[0]; // oxygen
+                    coarse_well(m)[1]=v[1]; // glucose
+                    coarse_well(m)[2]=v[2]; // glutamine
+                    coarse_well(m)[3]=v[3]; // lactate
+                }
+            }
+
+            }
             
-            // Sourcing 
-            //old_coarse_well = coarse_well;
-            //coarse_well.simulate_diffusion_decay( diffusion_dt ); 
-            //new_coarse_well = coarse_well;
-            
+
+            coarse_well.simulate_diffusion_decay( diffusion_dt ); 
+
+
+
+            // Projection---
+           
 
             
             //std::cout<< PhysiCell_globals.current_time << std::endl;;
@@ -338,21 +357,26 @@ int main( int argc, char* argv[] )
                 }
             } */
             
-             //double value = 1.2;
-             // Start -------- Kali's Code
-/*              if (fabs( PhysiCell_globals.current_time - 10  ) < 0.0000000001)
-                for( int n = 16; n < microenvironment.mesh.voxels.size() ; n++ )
-                {
-                    coarse_well(n)[0]=value;
-                } */
+             //
+/*              // Start-- Refreshment
+             if (fabs( PhysiCell_globals.current_time - 1728  ) < 0.0000000001)
+            {
+            for ( int m = 0; m < coarse_well.mesh.voxels.size() ; m++)
+            {
+                coarse_well(m)[0]=38; // oxygen
+                coarse_well(m)[1]=16.897255; // glucose
+                coarse_well(m)[2]=5.40; //glutamine
+                coarse_well(m)[3]=0; // lactate
+            }
+            } */
 
-             // End -------- Kali's Code
+             // End-- Refreshment
              
             
 			// std::cout << "where is the bug?" << std::endl;
 			// run PhysiCell 
 			((Cell_Container *)microenvironment.agent_container)->update_all_cells( PhysiCell_globals.current_time );
-            simulate_SBML_for_all_cells();
+            //simulate_SBML_for_all_cells();
 			
             
 			/*

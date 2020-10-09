@@ -219,7 +219,7 @@ void create_cell_types( void )
 	organoid_cell.phenotype.secretion.saturation_densities[glutamine_substrate_index] = 0.0; 
     
     organoid_cell.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
-	organoid_cell.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.5; 
+	organoid_cell.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.001; 
 	organoid_cell.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;   
     
 		
@@ -242,7 +242,7 @@ void create_cell_types( void )
 	fibroblast.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.0;
 	fibroblast.phenotype.cycle.data.transition_rate(End_index,Start_index) = 0.0;
 	
-	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.1; 
+	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 1.0; 
 	fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
 	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
 	
@@ -367,7 +367,7 @@ void setup_tissue( void )
             {			
                 pCell = create_cell(fibroblast);
                 pCell->assign_position(i,-500,j);
-                //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+/*                 //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
                 rrc::RRHandle rrHandle = createRRInstance();
                 if (!rrc::loadSBML (rrHandle, "CAF_Toy_Model.xml")) {
                     std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
@@ -375,7 +375,7 @@ void setup_tissue( void )
                 // 	getchar ();
                 // 	exit (0);
                 }
-                pCell->phenotype.molecular.model_rr = rrHandle;
+                pCell->phenotype.molecular.model_rr = rrHandle; */
             }
         } 	
     }    
@@ -463,7 +463,7 @@ void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt
 	static int End_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model );
 
     double tr = phenotype.cycle.data.transition_rate( Start_index,End_index ); */
-    double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
+    //double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
     //std::cout << pCell->custom_data[i_Oxy_i] << std::endl;
     
 	return;
@@ -578,11 +578,11 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         //std::cout << internal_oxygen << "," << phenotype.volume.total << std::endl;
         
         // Custom Data indices
-        double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
-        double i_Glu_i = pCell->custom_data.find_variable_index( "glucose_i_conc" );
-        double i_Glt_i = pCell->custom_data.find_variable_index( "glutamine_i_conc" );
-        double i_Lac_i = pCell->custom_data.find_variable_index( "lactate_i_conc" );
-        double energy_vi = pCell->custom_data.find_variable_index( "energy" );
+        static int i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
+        static int i_Glu_i = pCell->custom_data.find_variable_index( "glucose_i_conc" );
+        static int i_Glt_i = pCell->custom_data.find_variable_index( "glutamine_i_conc" );
+        static int i_Lac_i = pCell->custom_data.find_variable_index( "lactate_i_conc" );
+        static int energy_vi = pCell->custom_data.find_variable_index( "energy" );
         double cell_volume = phenotype.volume.total;
 
         // Calculating internal concentrations & Updating cell data
@@ -590,6 +590,14 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         pCell->custom_data[i_Glu_i] = internal_glucose / cell_volume;
         pCell->custom_data[i_Lac_i] = internal_lactate / cell_volume;
         pCell->custom_data[i_Glt_i] = internal_glutamine / cell_volume;
+        if (pCell->custom_data[i_Oxy_i] < 0)
+        { std::cout <<  pCell->custom_data[i_Oxy_i]  << std::endl; }
+        if (pCell->custom_data[i_Glu_i] < 0)
+        { std::cout <<  pCell->custom_data[i_Glu_i]  << std::endl; }
+        if (pCell->custom_data[i_Lac_i] < 0)
+        { std::cout <<  pCell->custom_data[i_Lac_i]  << std::endl; }
+        if (pCell->custom_data[i_Glt_i] < 0)
+        { std::cout <<  pCell->custom_data[i_Glt_i]  << std::endl; }
         
         // ! NO Energy Update is required !
         //std::cout <<  "Internal Oxygen Amount: " << internal_oxygen  << std::endl;

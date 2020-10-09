@@ -59,6 +59,8 @@ for i = 1:length(OutMatFiles)+1
     title('glutamine')
     subplot(2,2,4);
     plot(centers,multiscale_microenvironment(8,:))
+    SubGroupTitle=strcat('Time =',num2str(i), ' min');
+    suptitle(SubGroupTitle)
     xlim([-500 10200])
     title('lactate')    
     frame = getframe(j);

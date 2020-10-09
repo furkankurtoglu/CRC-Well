@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created by COPASI version 4.24 (Build 197) on 2020-09-24 11:17 with libSBML version 5.17.0. -->
+<!-- Created by COPASI version 4.24 (Build 197) on 2020-10-09 12:34 with libSBML version 5.17.0. -->
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
   <model metaid="COPASI0" id="New_Model" name="New Model">
     <annotation>
@@ -163,7 +163,7 @@
       </species>
     </listOfSpecies>
     <listOfParameters>
-      <parameter metaid="COPASI6" id="k_aer" name="k_aer" value="0.005" constant="true">
+      <parameter metaid="COPASI6" id="k_aer" name="k_aer" value="5e-05" constant="true">
         <annotation>
           <COPASI xmlns="http://www.copasi.org/static/sbml">
             <rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -178,7 +178,7 @@
           </COPASI>
         </annotation>
       </parameter>
-      <parameter metaid="COPASI7" id="k_ane" name="k_ane" value="0.001" constant="true">
+      <parameter metaid="COPASI7" id="k_ane" name="k_ane" value="1e-05" constant="true">
         <annotation>
           <COPASI xmlns="http://www.copasi.org/static/sbml">
             <rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -193,7 +193,7 @@
           </COPASI>
         </annotation>
       </parameter>
-      <parameter metaid="COPASI8" id="k_usage" name="k_usage" value="0.05" constant="true">
+      <parameter metaid="COPASI8" id="k_usage" name="k_usage" value="0.0005" constant="true">
         <annotation>
           <COPASI xmlns="http://www.copasi.org/static/sbml">
             <rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -208,7 +208,7 @@
           </COPASI>
         </annotation>
       </parameter>
-      <parameter metaid="COPASI9" id="k_glut" name="k_glut" value="0.0002" constant="true">
+      <parameter metaid="COPASI9" id="k_glut" name="k_glut" value="2e-05" constant="true">
         <annotation>
           <COPASI xmlns="http://www.copasi.org/static/sbml">
             <rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
