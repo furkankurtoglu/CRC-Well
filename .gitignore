@@ -3,3 +3,7 @@ PhysiCell_1.7.1_main\*.exe
 PhysiCell_1.7.1_main\*.mat
 PhysiCell_1.7.1_main\*.svg
 PhysiCell_1.7.1_main\output
+*.svg
+*.mat
+*.exe
+*.o
