@@ -14,8 +14,8 @@ OutMatFiles(1) = [];
 OutMatFiles(1) = [];
 CMicEnvOutMatFiles = MatFiles(contains(MatFiles,'microenvironment1'));
 names={'Oxygen','Glucose','Glutamine,','Lactate'};
-Save_MicEnv = 'N';
-Save_CMicEnv = 'Y';
+Save_MicEnv = 'Y';
+Save_CMicEnv = 'N';
 
 %%
 filename1="MicroEnv.gif";

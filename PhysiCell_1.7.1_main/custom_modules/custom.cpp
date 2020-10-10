@@ -132,8 +132,8 @@ void create_cell_types( void )
 	// set the rate terms in the default phenotype 
 
 	// first find index for a few key variables. 
-	int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
-	int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
+	static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
+	static int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
     
 	int oxygen_substrate_index = microenvironment.find_density_index( "oxygen" ); 
  	int glucose_substrate_index = microenvironment.find_density_index( "glucose" );
@@ -465,6 +465,23 @@ void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt
     double tr = phenotype.cycle.data.transition_rate( Start_index,End_index ); */
     //double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
     //std::cout << pCell->custom_data[i_Oxy_i] << std::endl;
+    static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
+/*     if( pCell->phenotype.death.dead == true )
+    {
+        pCell->functions.custom_cell_rule = NULL; 
+		return; 
+    } */
+    static int lactate_index = microenvironment.find_density_index( "lactate" ); 
+    double lactate_threshold = 0.05;
+    
+    if( pCell->phenotype.death.dead == false && pCell->type == 1 )
+    { 
+        if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
+        {
+            std::cout << "Dyiiinnggg" << std::endl;
+            pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
+        }
+    }
     
 	return;
 }
