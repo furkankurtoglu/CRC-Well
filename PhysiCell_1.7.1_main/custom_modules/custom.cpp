@@ -367,18 +367,21 @@ void setup_tissue( void )
             {			
                 pCell = create_cell(fibroblast);
                 pCell->assign_position(i,-500,j);
-                //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
-                rrc::RRHandle rrHandle = createRRInstance();
-                if (!rrc::loadSBML (rrHandle, "CAF_Toy_Model.xml")) {
-                    std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
-                // 	printf ("Error message: %s\n", getLastError());
-                // 	getchar ();
-                // 	exit (0);
+                if (parameters.bools("create_SBML")) {
+                    std::cout << "Adding SBML for Fibroblasts" << std::endl;
+                    // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                    rrc::RRHandle rrHandle = createRRInstance();
+                    if (!rrc::loadSBML (rrHandle, "CAF_Toy_Model.xml")) {
+                        std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                    // 	printf ("Error message: %s\n", getLastError());
+                    // 	getchar ();
+                    // 	exit (0);
+                    }
+                    pCell->phenotype.molecular.model_rr = rrHandle;
                 }
-                pCell->phenotype.molecular.model_rr = rrHandle;
-            }
-        } 	
-    }    
+            } 	
+        }  
+    }
     
     
 /*     if (parameters.bools("fibroblast_seeding"))
@@ -420,7 +423,7 @@ void setup_tissue( void )
     double number_of_organoid = 250; //parameters.doubles("number_of_organoid")
 	
 	if (parameters.bools("organoid_cell_seeding"))
-		{ 
+	{ 
             std::cout << "creating CRCs" << std::endl;
 			for (int i = 0; i < number_of_organoid; i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
 			{
@@ -439,20 +442,24 @@ void setup_tissue( void )
                     positions[i][2] += zrand;//(rand() % 5333) - 2666;
                     pCell = create_cell(organoid_cell);
                     pCell->assign_position( positions[i] );
-                    
-                    // Adding SBML model to cells
-                    //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
-                    rrc::RRHandle rrHandle = createRRInstance();
-                    if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
-                        std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
-                    // 	printf ("Error message: %s\n", getLastError());
-                    // 	getchar ();
-                    // 	exit (0);
+                    if (parameters.bools("create_SBML")) {
+                        // Adding SBML model to cells
+                        std::cout << "Adding SBML for Organoids" << std::endl;
+                        // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                        rrc::RRHandle rrHandle = createRRInstance();
+                        if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
+                            std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                        // 	printf ("Error message: %s\n", getLastError());
+                        // 	getchar ();
+                        // 	exit (0);
+                        }
+                        pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
                     }
-                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
+                    
+                    
                 }
 			}
-		}	
+	}	
 
 	return; 
 }
@@ -639,7 +646,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         // SBML Simulation
         result = rrc::simulateEx (pCell->phenotype.molecular.model_rr, 0, 0.01, 2);  // start time, end time, and number of points
         
-        freeRRCData (result);
+
         
         //std::cout << result->ColumnHeaders[0] << result->Data[6] << std::endl;
         
@@ -677,6 +684,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         phenotype.molecular.internalized_total_substrates[i_Oxy] = pCell->custom_data[i_Oxy_i]*cell_volume;
         phenotype.molecular.internalized_total_substrates[i_Lac] = pCell->custom_data[i_Lac_i]*cell_volume;
         phenotype.molecular.internalized_total_substrates[i_Glt] = pCell->custom_data[i_Glt_i]*cell_volume;
+        freeRRCData (result);
     }
 
     if( pCell->phenotype.death.dead == false && pCell->type == 2 )

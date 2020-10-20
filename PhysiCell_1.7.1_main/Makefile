@@ -32,8 +32,8 @@ ARCH := native # best auto-tuning
 # LIBRR_DIR := C:\Kalis-MacBook-Pro\Library\Frameworks\Python.framework\Versions\3.7\lib\python3.7\site-packages\roadrunner
 # LIBRR_LIBS := C:\Kalis-MacBook-Pro\Library\Frameworks\Python.framework\Versions\3.7\lib\python3.7\site-packages\roadrunner\bin
 
-LIBRR_DIR := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m
-LIBRR_LIBS := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m\bin
+LIBRR_DIR := /Users/kalikonstantinopoulos/libroadrunner/roadrunner-osx-10.9-cp36m
+LIBRR_LIBS := /Users/kalikonstantinopoulos/libroadrunner/roadrunner-osx-10.9-cp36m/lib
 
 LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
 
@@ -64,7 +64,8 @@ ALL_OBJECTS := $(PhysiCell_OBJECTS) $(PhysiCell_custom_module_OBJECTS)
 
 all: main.cpp $(ALL_OBJECTS)
 	$(COMPILE_COMMAND) -L${LIBRR_LIBS} -lroadrunner_c_api -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp 
-
+	rm -rf $(PROGRAM_NAME).dSYM
+	export DYLD_LIBRARY_PATH=/Users/kalikonstantinopoulos/libroadrunner/roadrunner-osx-10.9-cp36m/lib
 # PhysiCell core components	
 
 PhysiCell_phenotype.o: ./core/PhysiCell_phenotype.cpp
