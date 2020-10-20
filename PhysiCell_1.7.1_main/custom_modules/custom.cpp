@@ -367,7 +367,7 @@ void setup_tissue( void )
             {			
                 pCell = create_cell(fibroblast);
                 pCell->assign_position(i,-500,j);
-/*                 //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
                 rrc::RRHandle rrHandle = createRRInstance();
                 if (!rrc::loadSBML (rrHandle, "CAF_Toy_Model.xml")) {
                     std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
@@ -375,7 +375,7 @@ void setup_tissue( void )
                 // 	getchar ();
                 // 	exit (0);
                 }
-                pCell->phenotype.molecular.model_rr = rrHandle; */
+                pCell->phenotype.molecular.model_rr = rrHandle;
             }
         } 	
     }    
@@ -441,7 +441,7 @@ void setup_tissue( void )
                     pCell->assign_position( positions[i] );
                     
                     // Adding SBML model to cells
-/*                     //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                    //std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
                     rrc::RRHandle rrHandle = createRRInstance();
                     if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
                         std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
@@ -449,7 +449,7 @@ void setup_tissue( void )
                     // 	getchar ();
                     // 	exit (0);
                     }
-                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell */
+                    pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
                 }
 			}
 		}	
@@ -607,7 +607,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         pCell->custom_data[i_Glu_i] = internal_glucose / cell_volume;
         pCell->custom_data[i_Lac_i] = internal_lactate / cell_volume;
         pCell->custom_data[i_Glt_i] = internal_glutamine / cell_volume;
-        if (pCell->custom_data[i_Oxy_i] < 0)
+/*         if (pCell->custom_data[i_Oxy_i] < 0)
         { std::cout <<  pCell->custom_data[i_Oxy_i]  << std::endl; }
         if (pCell->custom_data[i_Glu_i] < 0)
         { std::cout <<  pCell->custom_data[i_Glu_i]  << std::endl; }
@@ -615,7 +615,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         { std::cout <<  pCell->custom_data[i_Lac_i]  << std::endl; }
         if (pCell->custom_data[i_Glt_i] < 0)
         { std::cout <<  pCell->custom_data[i_Glt_i]  << std::endl; }
-        
+         */
         // ! NO Energy Update is required !
         //std::cout <<  "Internal Oxygen Amount: " << internal_oxygen  << std::endl;
         //std::cout <<  "Internal Oxygen Concentration: " << pCell->custom_data[i_Oxy_i]  << std::endl;
@@ -639,6 +639,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         // SBML Simulation
         result = rrc::simulateEx (pCell->phenotype.molecular.model_rr, 0, 0.01, 2);  // start time, end time, and number of points
         
+        freeRRCData (result);
         
         //std::cout << result->ColumnHeaders[0] << result->Data[6] << std::endl;
         
@@ -713,6 +714,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         // SBML Simulation
         result = rrc::simulateEx (pCell->phenotype.molecular.model_rr, 0, 0.01, 2);  // start time, end time, and number of points
         
+ 
         
         //std::cout << result->ColumnHeaders[1] << result->Data[3] << std::endl;
         
@@ -725,7 +727,7 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         pCell->custom_data[i_Lac_i] = result->Data[3];
 
         phenotype.molecular.internalized_total_substrates[i_Lac] = pCell->custom_data[i_Lac_i]*cell_volume;
-
+       freeRRCData (result);
     }
 
     
