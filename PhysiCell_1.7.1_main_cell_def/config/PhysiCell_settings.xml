@@ -175,7 +175,7 @@
 	<cell_definitions>
 		<cell_definition name="test" ID="0">
 			<phenotype>
-				<cycle code="6" name="flow_cytometry_separated_cycle_model">  
+				<cycle code="3" name="live">  
 					<!-- using higher than normal significant digits to match divisions in default code -->
 					<phase_transition_rates units="1/min"> 
 						<!-- G0/G1 to S -->
@@ -260,13 +260,34 @@
 					</options>
 				</motility>
 
-				<molecular />
+				<secretion>
+					<oxygen_uptake_rate>0.0</oxygen_uptake_rate>
+					<oxygen_secretion_rate>0</oxygen_secretion_rate>
+					<oxygen_saturation_density>0.0</oxygen_saturation_density>
+
+					<glucose_uptake_rate>0.0</glucose_uptake_rate>
+					<glucose_secretion_rate>0</glucose_secretion_rate>
+					<glucose_saturation_density>0.0</glucose_saturation_density>
+
+					<glutamine_uptake_rate>0.0</glutamine_uptake_rate>
+					<glutamine_secretion_rate>0</glutamine_secretion_rate>
+					<glutamine_saturation_density>0.0</glutamine_saturation_density>
+
+					<lactate_uptake_rate>0.0</lactate_uptake_rate>
+					<lactate_secretion_rate>0</lactate_secretion_rate>
+					<lactate_saturation_density>0.0</lactate_saturation_density>
+				</secretion>
 			</phenotype>
 			<custom_data>
-			<!--insert custom data from custom.cpp file-->
+				<organoid_number units="dimensionless">0.0</organoid_number>
+				<oxygen_i_conc units="mmHg">0.0</oxygen_i_conc>
+				<glucose_i_conc units="mMolar">0.0</glucose_i_conc>
+				<glutamine_i_conc units="mMolar">0.0</glutamine_i_conc>
+				<lactate_i_conc units="mMolar">0.0</lactate_i_conc>
+				<energy units="a.u">0.0</energy>
 			</custom_data>
 		</cell_definition>
-<!--	
+	
 		<cell_definition name="fibroblast" parent_type="test" ID="1">
 			<phenotype>
 				<death>
@@ -274,29 +295,34 @@
 						<death_rate units="1/min">0</death_rate>  
 					</model> 
 				</death>
+				<volume>
+					<total units="micron^3">113.1</total>
+				</volume>
 				<motility>  
 					<options>
 						<enabled>false</enabled>
 					</options>
 				</motility>
 				<secretion>
+					<lactate_uptake_rate>0.1</lactate_uptake_rate>
 				</secretion>
 			</phenotype>
 			<custom_data>
 			</custom_data>
 		</cell_definition>
 
-		<cell_definition name="organoid" parent_type="test" ID="2">
+		<cell_definition name="KRAS_positive" parent_type="test" ID="3">
 			<phenotype>
 				<mechanics> 
-					<cell_cell_adhesion_strength units="micron/min">0</cell_cell_adhesion_strength>
-					<cell_cell_repulsion_strength units="micron/min">10</cell_cell_repulsion_strength>
 				</mechanics>
 				<death>
 					<model code="100" name="apoptosis"> 
 						<death_rate units="1/min">5e-4</death_rate>  
 					</model> 
 				</death>
+				<volume>
+					<total units="micron^3">522.03</total>
+				</volume>
 				<motility>  
 					<speed units="micron/min">4</speed>
 					<persistence_time units="min">5</persistence_time>
@@ -306,12 +332,50 @@
 						<use_2D>true</use_2D>
 					</options>
 				</motility>
-
+				<secretion>
+					<oxygen_uptake_rate>0.5</oxygen_uptake_rate>
+					<glucose_uptake_rate>0.05</glucose_uptake_rate>
+					<glutamine_uptake_rate>0.0005</glutamine_uptake_rate>
+					<lactate_secretion_rate>0.005</lactate_secretion_rate
+					<lactate_saturation_density>20.0</lactate_saturation_density>
+				</secretion>
 			</phenotype>
 			<custom_data>
 			</custom_data>
 		</cell_definition>
--->
+
+		<cell_definition name="KRAS_negative" parent_type="test" ID="2">
+			<phenotype>
+				<mechanics> 
+				</mechanics>
+				<death>
+					<model code="100" name="apoptosis"> 
+						<death_rate units="1/min">0</death_rate>  
+					</model> 
+				</death>
+				<volume>
+					<total units="micron^3">522.03</total>
+				</volume>
+				<motility>  
+					<speed units="micron/min">4</speed>
+					<persistence_time units="min">5</persistence_time>
+					<migration_bias units="dimensionless">0.70</migration_bias>
+					<options>
+						<enabled>false</enabled>
+						<use_2D>true</use_2D>
+					</options>
+				</motility>
+				<secretion>
+					<oxygen_uptake_rate>0.5</oxygen_uptake_rate>
+					<glucose_uptake_rate>0.05</glucose_uptake_rate>
+					<glutamine_uptake_rate>0.0005</glutamine_uptake_rate>
+					<lactate_secretion_rate>0.001</lactate_secretion_rate>
+					<lactate_saturation_density>10.0</lactate_saturation_density>
+				</secretion>
+			</phenotype>
+			<custom_data>
+			</custom_data>
+		</cell_definition>
 	</cell_definitions>
 	<user_parameters>
 		<random_seed type="int" units="dimensionless">0</random_seed> 

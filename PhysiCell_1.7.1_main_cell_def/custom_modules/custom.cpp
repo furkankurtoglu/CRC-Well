@@ -86,8 +86,9 @@ extern "C" rrc::RRHandle createRRInstance();
 
 
 Cell_Definition fibroblast; 
-Cell_Definition organoid_cell;
-
+Cell_Definition KRAS_positive;
+Cell_Definition KRAS_negative;
+Cell_Definition test; 
 
 void create_cell_types( void )
 {
@@ -95,7 +96,7 @@ void create_cell_types( void )
 	// same initial histogram of oncoprotein, even if threading means 
 	// that future division and other events are still not identical 
 	// for all runs 
-	initialize_cell_definitions_from_pugixml();
+	
 	SeedRandom( parameters.ints("random_seed") ); // or specify a seed here 
 	
 	// housekeeping 
@@ -128,6 +129,8 @@ void create_cell_types( void )
 	
 	cell_defaults.phenotype.secretion.sync_to_microenvironment( &microenvironment );
 	cell_defaults.phenotype.sync_to_functions( cell_defaults.functions ); 
+
+    initialize_cell_definitions_from_pugixml();
 
 	// set the rate terms in the default phenotype 
 
@@ -178,51 +181,93 @@ void create_cell_types( void )
 	
 	
 	
-	// --------- Defining Organoid Cells -------- //
-	organoid_cell = cell_defaults; 
-	organoid_cell.type = 1; 
-	organoid_cell.name = "organoid cell"; 
+	// --------- Defining KRAS Positive Cells -------- //
+	KRAS_positive = cell_defaults; 
+	KRAS_positive.type = 3; 
+	KRAS_positive.name = "KRAS_positive"; 
 	
 	// make sure the new cell type has its own reference phenotyhpe
 	
-	organoid_cell.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
-	organoid_cell.phenotype.motility.is_motile = false; 
+	KRAS_positive.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
+	KRAS_positive.phenotype.motility.is_motile = false; 
 	// organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
 	// organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
 	// organoid_cell.phenotype.motility.migration_bias = 0.0;// completely random 
 	
-    organoid_cell.phenotype.molecular.sync_to_microenvironment( &microenvironment );
-    organoid_cell.functions.update_phenotype = tumor_energy_update_function;
+    KRAS_positive.phenotype.molecular.sync_to_microenvironment( &microenvironment );
+    KRAS_positive.functions.update_phenotype = tumor_energy_update_function;
     
     
 	// Set cell-cell adhesion to 5% of other cells 
-	organoid_cell.phenotype.mechanics.cell_cell_adhesion_strength *= 0.05;  // parameters.doubles( "organoid_cell_relative_adhesion" ); // 0.05; 
+	KRAS_positive.phenotype.mechanics.cell_cell_adhesion_strength *= 0.05;  // parameters.doubles( "organoid_cell_relative_adhesion" ); // 0.05; 
 	
 	// Set apoptosis to zero 
-	organoid_cell.phenotype.death.rates[apoptosis_model_index] = 0.0; //parameters.doubles( "organoid_cell_apoptosis_rate" ); // 0.0; 
+	KRAS_positive.phenotype.death.rates[apoptosis_model_index] = 0.0; //parameters.doubles( "organoid_cell_apoptosis_rate" ); // 0.0; 
 	
 	// Setting Proliferation
 	// 
-	organoid_cell.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.00021;//parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
+	KRAS_positive.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.00021;//parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
 	
     // Uptake/Secretion
-    organoid_cell.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.1; 
-	organoid_cell.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
-	organoid_cell.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
+    KRAS_positive.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.5; 
+	KRAS_positive.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
+	KRAS_positive.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
     
-    organoid_cell.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.1; 
-	organoid_cell.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
-	organoid_cell.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
+    KRAS_positive.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.05; 
+	KRAS_positive.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
+	KRAS_positive.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
     
-    organoid_cell.phenotype.secretion.uptake_rates[glutamine_substrate_index] = 0.1; 
-	organoid_cell.phenotype.secretion.secretion_rates[glutamine_substrate_index] = 0.0; 
-	organoid_cell.phenotype.secretion.saturation_densities[glutamine_substrate_index] = 0.0; 
+    KRAS_positive.phenotype.secretion.uptake_rates[glutamine_substrate_index] = 0.0005; 
+	KRAS_positive.phenotype.secretion.secretion_rates[glutamine_substrate_index] = 0.0; 
+	KRAS_positive.phenotype.secretion.saturation_densities[glutamine_substrate_index] = 0.0; 
     
-    organoid_cell.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
-	organoid_cell.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.001; 
-	organoid_cell.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;   
+    KRAS_positive.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
+	KRAS_positive.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.005; 
+	KRAS_positive.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;   
     
-		
+	// --------- Defining KRAS Negative Cells -------- //
+	KRAS_negative = cell_defaults; 
+	KRAS_negative.type = 2; 
+	KRAS_negative.name = "KRAS_negative"; 
+	
+	// make sure the new cell type has its own reference phenotyhpe
+	
+	KRAS_negative.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
+	KRAS_negative.phenotype.motility.is_motile = false; 
+	// organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
+	// organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
+	// organoid_cell.phenotype.motility.migration_bias = 0.0;// completely random 
+	
+    KRAS_negative.phenotype.molecular.sync_to_microenvironment( &microenvironment );
+    KRAS_negative.functions.update_phenotype = tumor_energy_update_function;
+    
+    
+	// Set cell-cell adhesion to 5% of other cells 
+	KRAS_negative.phenotype.mechanics.cell_cell_adhesion_strength *= 0.05;  // parameters.doubles( "organoid_cell_relative_adhesion" ); // 0.05; 
+	
+	// Set apoptosis to zero 
+	KRAS_negative.phenotype.death.rates[apoptosis_model_index] = 0.0; //parameters.doubles( "organoid_cell_apoptosis_rate" ); // 0.0; 
+	
+	// Setting Proliferation
+	// 
+	KRAS_negative.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.00021;//parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
+	
+    // Uptake/Secretion
+    KRAS_negative.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.5; 
+	KRAS_negative.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
+	KRAS_negative.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
+    
+    KRAS_negative.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.05; 
+	KRAS_negative.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
+	KRAS_negative.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
+    
+    KRAS_negative.phenotype.secretion.uptake_rates[glutamine_substrate_index] = 0.0005; 
+	KRAS_negative.phenotype.secretion.secretion_rates[glutamine_substrate_index] = 0.0; 
+	KRAS_negative.phenotype.secretion.saturation_densities[glutamine_substrate_index] = 0.0; 
+    
+    KRAS_negative.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
+	KRAS_negative.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.005; 
+	KRAS_negative.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;  	
 		
 	//------------ Defining Fibroblast ------------//
 	
@@ -242,11 +287,14 @@ void create_cell_types( void )
 	fibroblast.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.0;
 	fibroblast.phenotype.cycle.data.transition_rate(End_index,Start_index) = 0.0;
 	
-	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 1.0; 
+	fibroblast.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.1; 
 	fibroblast.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.0; 
 	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
 	
 	// ---- END -- Fibroblast Cell Definitions -- END ---- //	
+
+    build_cell_definitions_maps();
+    display_cell_definitions(std::cout);
 	return; 
 }
 
@@ -354,17 +402,28 @@ void setup_tissue( void )
 	// create some cells near the origin
 	
 	Cell* pCell;
-
     
     // 20,000 fibroblast seeding
     if (parameters.bools("test_cell_seeding"))
     {
         std::cout << "creating cell" << std::endl;
 		
-        pCell = create_cell(cell_definitions_by_name("test"));
-        pCell->assign_position(0,-500,0);
-    }
-	  
+        pCell = create_cell(test);
+        pCell->assign_position(0,0,0);
+        std::cout << "I passed seeding" << std::endl;
+        if (parameters.bools("create_SBML")) {
+                    std::cout << "Adding SBML for Test Cells" << std::endl;
+                    // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                    rrc::RRHandle rrHandle = createRRInstance();
+                    if (!rrc::loadSBML (rrHandle, "CAF_Toy_Model.xml")) {
+                        std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                    // 	printf ("Error message: %s\n", getLastError());
+                    // 	getchar ();
+                    // 	exit (0);
+                    pCell->phenotype.molecular.model_rr = rrHandle;
+                    }           
+        }
+    } 
     
     
 /*     if (parameters.bools("fibroblast_seeding"))
