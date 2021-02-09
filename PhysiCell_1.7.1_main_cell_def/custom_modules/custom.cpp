@@ -102,6 +102,7 @@ void create_cell_types( void )
 	// housekeeping 
 	
 	initialize_default_cell_definition();
+    /*
 	cell_defaults.phenotype.secretion.sync_to_microenvironment( &microenvironment ); 
 	
 	// Name the default cell type 
@@ -116,7 +117,7 @@ void create_cell_types( void )
 	// set default_cell_functions; 
 	
 	cell_defaults.functions.update_phenotype = NULL; 
-	
+	*/
 	// only needed for a 2-D simulation: 
 	
 	/*
@@ -126,7 +127,7 @@ void create_cell_types( void )
 	*/
 	
 	// make sure the defaults are self-consistent. 
-	
+	/*
 	cell_defaults.phenotype.secretion.sync_to_microenvironment( &microenvironment );
 	cell_defaults.phenotype.sync_to_functions( cell_defaults.functions ); 
 
@@ -176,19 +177,20 @@ void create_cell_types( void )
     cell_defaults.custom_data.add_variable( "glutamine_i_conc", "mMolar", 0.0);
     cell_defaults.custom_data.add_variable( "lactate_i_conc" , "mMolar", 0.0 ); 
     cell_defaults.custom_data.add_variable( "energy", "a.u", 0.0);
-    
+    */
 	// add custom data here, if any 
 	
 	
 	
 	// --------- Defining KRAS Positive Cells -------- //
+    /*
 	KRAS_positive = cell_defaults; 
 	KRAS_positive.type = 3; 
 	KRAS_positive.name = "KRAS_positive"; 
 	
 	// make sure the new cell type has its own reference phenotyhpe
 	
-	KRAS_positive.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
+	KRAS_positive.parameters.pReference_live_phenotype = &( KRAS_positive.phenotype ); 
 	KRAS_positive.phenotype.motility.is_motile = false; 
 	// organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
 	// organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
@@ -232,7 +234,7 @@ void create_cell_types( void )
 	
 	// make sure the new cell type has its own reference phenotyhpe
 	
-	KRAS_negative.parameters.pReference_live_phenotype = &( organoid_cell.phenotype ); 
+	KRAS_negative.parameters.pReference_live_phenotype = &( KRAS_negative.phenotype ); 
 	KRAS_negative.phenotype.motility.is_motile = false; 
 	// organoid_cell.phenotype.motility.persistence_time = parameters.doubles( "motile_cell_persistence_time" ); // 15.0; // 15 minutes
 	// organoid_cell.phenotype.motility.migration_speed = parameters.doubles( "motile_cell_migration_speed" ); // 0.25; // 0.25 micron/minute 
@@ -292,7 +294,7 @@ void create_cell_types( void )
 	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
 	
 	// ---- END -- Fibroblast Cell Definitions -- END ---- //	
-
+*/
     build_cell_definitions_maps();
     display_cell_definitions(std::cout);
 	return; 
@@ -467,6 +469,152 @@ void setup_tissue( void )
 	if (parameters.bools("organoid_cell_seeding"))
 	{ 
             std::cout << "creating CRCs" << std::endl;
+            if (parameters.doubles("organoid_cell_seeding_method") == 1)
+            {
+                for (int i = 0; i < number_of_organoid; i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
+			    {
+                
+                    std::vector<std::vector<double>> positions = create_cell_sphere_positions(cell_radius,initial_tumor_radius); 
+                    //std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
+                    // create organoid
+                        double xrand = (rand() % 5333) - 2666;
+                        double yrand = (rand() % 961) - 480;
+                        double zrand = (rand() % 5333) - 2666;
+                    //std::cout << positions.size() << std::endl;
+                    for( int i=0; i < positions.size(); i++ )
+                    {
+                        positions[i][0] += xrand;//(rand() % 5333) - 2666;
+                        positions[i][1] += yrand;//(rand() % 961) - 480;
+                        positions[i][2] += zrand;//(rand() % 5333) - 2666;
+                        pCell = create_cell(KRAS_positive);
+                        pCell->assign_position( positions[i] );
+                        if (parameters.bools("create_SBML")) {
+                            // Adding SBML model to cells
+                            std::cout << "Adding SBML for Organoids" << std::endl;
+                            // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                            rrc::RRHandle rrHandle = createRRInstance();
+                            if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
+                                std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                            // 	printf ("Error message: %s\n", getLastError());
+                            // 	getchar ();
+                            // 	exit (0);
+                            }
+                            pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
+                        }
+                        
+                        
+                    }
+			    }
+            }
+            if (parameters.doubles("organoid_cell_seeding_method") == 2)
+            {
+                for (int i = 0; i < number_of_organoid; i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
+			    {
+                
+                    std::vector<std::vector<double>> positions = create_cell_sphere_positions(cell_radius,initial_tumor_radius); 
+                    //std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
+                    // create organoid
+                        double xrand = (rand() % 5333) - 2666;
+                        double yrand = (rand() % 961) - 480;
+                        double zrand = (rand() % 5333) - 2666;
+                    //std::cout << positions.size() << std::endl;
+                    for( int i=0; i < positions.size(); i++ )
+                    {
+                        positions[i][0] += xrand;//(rand() % 5333) - 2666;
+                        positions[i][1] += yrand;//(rand() % 961) - 480;
+                        positions[i][2] += zrand;//(rand() % 5333) - 2666;
+                        pCell = create_cell(KRAS_negative);
+                        pCell->assign_position( positions[i] );
+                        if (parameters.bools("create_SBML")) {
+                            // Adding SBML model to cells
+                            std::cout << "Adding SBML for Organoids" << std::endl;
+                            // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                            rrc::RRHandle rrHandle = createRRInstance();
+                            if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
+                                std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                            // 	printf ("Error message: %s\n", getLastError());
+                            // 	getchar ();
+                            // 	exit (0);
+                            }
+                            pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
+                        }
+                        
+                        
+                    }
+			    }
+            }
+            if (parameters.doubles("organoid_cell_seeding_method") == 3)
+            {
+                for (int i = 0; i < parameters.doubles("percent_KRAS_positive")*number_of_organoid; i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
+			    {
+                
+                    std::vector<std::vector<double>> positions = create_cell_sphere_positions(cell_radius,initial_tumor_radius); 
+                    //std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
+                    // create organoid
+                        double xrand = (rand() % 5333) - 2666;
+                        double yrand = (rand() % 961) - 480;
+                        double zrand = (rand() % 5333) - 2666;
+                    //std::cout << positions.size() << std::endl;
+                    for( int i=0; i < positions.size(); i++ )
+                    {
+                        positions[i][0] += xrand;//(rand() % 5333) - 2666;
+                        positions[i][1] += yrand;//(rand() % 961) - 480;
+                        positions[i][2] += zrand;//(rand() % 5333) - 2666;
+                        pCell = create_cell(KRAS_positive);
+                        pCell->assign_position( positions[i] );
+                        if (parameters.bools("create_SBML")) {
+                            // Adding SBML model to cells
+                            std::cout << "Adding SBML for Organoids" << std::endl;
+                            // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                            rrc::RRHandle rrHandle = createRRInstance();
+                            if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
+                                std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                            // 	printf ("Error message: %s\n", getLastError());
+                            // 	getchar ();
+                            // 	exit (0);
+                            }
+                            pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
+                        }
+                        
+                        
+                    }
+			    }
+                for (int i = 0; i < number_of_organoid - (parameters.doubles("percent_KRAS_positive")*number_of_organoid); i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
+			    {
+                
+                    std::vector<std::vector<double>> positions = create_cell_sphere_positions(cell_radius,initial_tumor_radius); 
+                    //std::cout << "creating " << positions.size() << " closely-packed organoid cells ... " << std::endl;
+                    // create organoid
+                        double xrand = (rand() % 5333) - 2666;
+                        double yrand = (rand() % 961) - 480;
+                        double zrand = (rand() % 5333) - 2666;
+                    //std::cout << positions.size() << std::endl;
+                    for( int i=0; i < positions.size(); i++ )
+                    {
+                        positions[i][0] += xrand;//(rand() % 5333) - 2666;
+                        positions[i][1] += yrand;//(rand() % 961) - 480;
+                        positions[i][2] += zrand;//(rand() % 5333) - 2666;
+                        pCell = create_cell(KRAS_negative);
+                        pCell->assign_position( positions[i] );
+                        if (parameters.bools("create_SBML")) {
+                            // Adding SBML model to cells
+                            std::cout << "Adding SBML for Organoids" << std::endl;
+                            // std::cerr << "------------->>>>>  Creating rrHandle, loadSBML file\n\n";
+                            rrc::RRHandle rrHandle = createRRInstance();
+                            if (!rrc::loadSBML (rrHandle, "CRC_Toy_Model.xml")) {
+                                std::cerr << "------------->>>>>  Error while loading SBML file  <-------------\n\n";
+                            // 	printf ("Error message: %s\n", getLastError());
+                            // 	getchar ();
+                            // 	exit (0);
+                            }
+                            pCell->phenotype.molecular.model_rr = rrHandle;  // assign the intracellular model to each cell
+                        }
+                        
+                        
+                    }
+			    }
+            }
+            /*
 			for (int i = 0; i < number_of_organoid; i++) // seeding number of organoid cells specified in PhysiCell_settings.xml
 			{
                 
@@ -501,6 +649,7 @@ void setup_tissue( void )
                     
                 }
 			}
+            */
 	}	
 
 	return; 

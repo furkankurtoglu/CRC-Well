@@ -172,11 +172,12 @@ int main( int argc, char* argv[] )
 	Cell_Container* cell_container = create_cell_container_for_microenvironment( microenvironment, mechanics_voxel_size );
 	
 	/* Users typically start modifying here. START USERMODS */ 
-	
+	std::cout << "creating cell types" << std::endl; 
 	create_cell_types();
-	
+    std::cout << "done creating cell types" << std::endl; 
+	std::cout << "setting up tissue" << std::endl; 
 	setup_tissue();
-
+    std::cout << "done with setting up tissue" << std::endl; 
 	/* Users typically stop modifying here. END USERMODS */ 
 	
 	// set MultiCellDS save options 
@@ -221,7 +222,8 @@ int main( int argc, char* argv[] )
 	// main loop 
 	
 	try 
-	{		
+	{	
+        std::cout << "reached the main loop" << std::endl; 	
 		while( PhysiCell_globals.current_time < PhysiCell_settings.max_time + 0.1*diffusion_dt )
 		{
             
