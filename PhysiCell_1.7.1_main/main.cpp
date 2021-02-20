@@ -172,26 +172,32 @@ int main( int argc, char* argv[] )
 	Cell_Container* cell_container = create_cell_container_for_microenvironment( microenvironment, mechanics_voxel_size );
 	
 	/* Users typically start modifying here. START USERMODS */ 
-	
+	std::cout << "creating cell types" << std::endl;
 	create_cell_types();
-	
+	std::cout << "done creating cell types" << std::endl;
+    std::cout << "setting up tissue" << std::endl;
 	setup_tissue();
-
+    std::cout << "done setting up tissue" << std::endl;
 	/* Users typically stop modifying here. END USERMODS */ 
 	
 	// set MultiCellDS save options 
 
 	set_save_biofvm_mesh_as_matlab( true ); 
+    std::cout << "saved mesh as matlab" << std::endl;
 	set_save_biofvm_data_as_matlab( true );   
+    std::cout << "saved data as matlab" << std::endl;
 	set_save_biofvm_cell_data( true ); 
+    std::cout << "saved cell data" << std::endl;
 	set_save_biofvm_cell_data_as_custom_matlab( true );
+    std::cout << "saved cell data as custom matlab" << std::endl;
 	
 	// save a simulation snapshot 
-	
+	std::cout << "start doing SVG stuff" << std::endl;
 	char filename[1024];
 	sprintf( filename , "%s/initial" , PhysiCell_settings.folder.c_str() ); 
+    std::cout << "printed file name" << std::endl;
 	save_PhysiCell_to_MultiCellDS_xml_pugi( filename , microenvironment , PhysiCell_globals.current_time ); 
-	
+	std::cout << "saved physicell to multicellds xml pugi" << std::endl;
 	// save a quick SVG cross section through z = 0, after setting its 
 	// length bar to 200 microns 
 
@@ -200,6 +206,7 @@ int main( int argc, char* argv[] )
 	// for simplicity, set a pathology coloring function 
 	
 	std::vector<std::string> (*cell_coloring_function)(Cell*) = my_coloring_function;
+	std::cout << "done with coloring function" << std::endl;
 	
 	sprintf( filename , "%s/initial.svg" , PhysiCell_settings.folder.c_str() ); 
 	SVG_plot( filename , microenvironment, 0.0 , PhysiCell_globals.current_time, cell_coloring_function );
