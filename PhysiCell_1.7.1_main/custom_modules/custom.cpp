@@ -317,7 +317,7 @@ void create_cell_types( void )
 	//------------ Defining Fibroblast ------------//
 	
 	fibroblast = cell_defaults; 
-	fibroblast.type = 2; 
+	fibroblast.type = 4; 
 	fibroblast.name = "fibroblast"; 
 	
 	// make sure the new cell type has its own reference phenotype
