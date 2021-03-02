@@ -264,7 +264,7 @@ void create_cell_types( void )
     
     KRAS_negative.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
 	KRAS_negative.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.001; 
-	KRAS_negative.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;  	
+	KRAS_negative.phenotype.secretion.saturation_densities[lactate_substrate_index] = 20.0;  	
 		
 	
 	// --------- Defining Organoid Cells -------- //
