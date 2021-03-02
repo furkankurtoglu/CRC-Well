@@ -220,7 +220,7 @@ void create_cell_types( void )
     
     KRAS_positive.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
 	KRAS_positive.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.005; 
-	KRAS_positive.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;   
+	KRAS_positive.phenotype.secretion.saturation_densities[lactate_substrate_index] = 20.0;   
     
 	// --------- Defining KRAS Negative Cells -------- //
 	KRAS_negative = cell_defaults; 
@@ -250,20 +250,20 @@ void create_cell_types( void )
 	KRAS_negative.phenotype.cycle.data.transition_rate(Start_index,End_index) = 0.00021;//parameters.doubles( "organoid_cell_relative_cycle_entry_rate" ); // 0.1; 
 	
     // Uptake/Secretion
-    KRAS_negative.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.5; 
+    KRAS_negative.phenotype.secretion.uptake_rates[oxygen_substrate_index] = 0.1; 
 	KRAS_negative.phenotype.secretion.secretion_rates[oxygen_substrate_index] = 0.0; 
 	KRAS_negative.phenotype.secretion.saturation_densities[oxygen_substrate_index] = 0.0; 
     
-    KRAS_negative.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.05; 
+    KRAS_negative.phenotype.secretion.uptake_rates[glucose_substrate_index] = 0.01; 
 	KRAS_negative.phenotype.secretion.secretion_rates[glucose_substrate_index] = 0.0; 
 	KRAS_negative.phenotype.secretion.saturation_densities[glucose_substrate_index] = 0.0; 
     
-    KRAS_negative.phenotype.secretion.uptake_rates[glutamine_substrate_index] = 0.0005; 
+    KRAS_negative.phenotype.secretion.uptake_rates[glutamine_substrate_index] = 0.0001; 
 	KRAS_negative.phenotype.secretion.secretion_rates[glutamine_substrate_index] = 0.0; 
 	KRAS_negative.phenotype.secretion.saturation_densities[glutamine_substrate_index] = 0.0; 
     
     KRAS_negative.phenotype.secretion.uptake_rates[lactate_substrate_index] = 0.0; 
-	KRAS_negative.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.005; 
+	KRAS_negative.phenotype.secretion.secretion_rates[lactate_substrate_index] = 0.001; 
 	KRAS_negative.phenotype.secretion.saturation_densities[lactate_substrate_index] = 10.0;  	
 		
 	
