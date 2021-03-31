@@ -289,6 +289,7 @@
 				<glutamine_i_conc units="mMolar">0.0</glutamine_i_conc>
 				<lactate_i_conc units="mMolar">0.0</lactate_i_conc>
 				<energy units="a.u">0.0</energy>
+				<lactate_threshold units = "mMolar">0.00001</lactate_threshold>
 			</custom_data>
 		</cell_definition>
 	
@@ -424,9 +425,9 @@
 		<organoid_cell_apoptosis_rate type="double" units="1/min">0.0</organoid_cell_apoptosis_rate> 
 		<organoid_cell_relative_cycle_entry_rate type="double" units="dimensionless">0.0141</organoid_cell_relative_cycle_entry_rate>
         <organoid_cell_seeding type="bool" units="none">true</organoid_cell_seeding>
-		<organoid_cell_seeding_method type="int" units="none">1</organoid_cell_seeding_method>
+		<organoid_cell_seeding_method type="int" units="none">3</organoid_cell_seeding_method>
         <number_of_organoids type="int" units="none">250</number_of_organoids>
-		<percent_KRAS_positive type="double" units="none">0.25</percent_KRAS_positive>
+		<percent_KRAS_positive type="double" units="none">0.5</percent_KRAS_positive>
         <initial_tumor_radius type="double" units="none">46.0</initial_tumor_radius>
 		
         

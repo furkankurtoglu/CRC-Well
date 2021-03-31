@@ -199,7 +199,7 @@ void create_cell_types( void )
 	
 	
 	// --------- Defining KRAS Positive Cells -------- //
-    
+    /*
 	KRAS_positive = cell_defaults; 
 	KRAS_positive.type = 3; 
 	KRAS_positive.name = "KRAS_positive"; 
@@ -310,9 +310,12 @@ void create_cell_types( void )
 	fibroblast.phenotype.secretion.saturation_densities[lactate_substrate_index] = 0.0; 
 	
 	// ---- END -- Fibroblast Cell Definitions -- END ---- //	
-
+*/
     build_cell_definitions_maps();
     display_cell_definitions(std::cout);
+    /*fibroblast.functions.update_phenotype = tumor_energy_update_function_fibroblast; */
+    /*KRAS_positive.functions.update_phenotype = tumor_energy_update_function_KRAS_positive;*/
+    /*KRAS_negative.functions.update_phenotype = tumor_energy_update_function_KRAS_negative;*/
 	return; 
 }
 
@@ -348,6 +351,7 @@ void setup_microenvironment( void )
 	default_microenvironment_options.Dirichlet_condition_vector = bc_vector;
 	
 	// set initial conditions 
+    
 	default_microenvironment_options.initial_condition_vector = { 38.0 }; 
 */
 	
@@ -439,6 +443,7 @@ void setup_tissue( void )
                 // pCell = create_cell(fibroblast);
                 pCell = create_cell( *pFibro );
                 pCell->assign_position(i,-500,j);
+                pCell->functions.update_phenotype = tumor_energy_update_function_fibroblast;
             } 	
         }  
     }
@@ -496,6 +501,7 @@ void setup_tissue( void )
                         // pCell = create_cell(KRAS_positive);
                         pCell = create_cell( *pKRAS_pos );
                         pCell->assign_position( positions[i] );
+                        pCell->functions.update_phenotype = tumor_energy_update_function_KRAS_positive;
                         kdx += 1;
                     }
 			    }
@@ -530,6 +536,7 @@ void setup_tissue( void )
                         // pCell = create_cell(KRAS_negative);
                         pCell = create_cell( *pKRAS_neg );
                         pCell->assign_position( positions[i] );
+                        pCell->functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
                     }
 			    }
             }
@@ -569,6 +576,7 @@ void setup_tissue( void )
                         // pCell = create_cell(KRAS_positive);
                         pCell = create_cell( *pKRAS_pos );
                         pCell->assign_position( positions[i] );
+                        pCell->functions.update_phenotype = tumor_energy_update_function_KRAS_positive;
                     }
 			    }
 
@@ -595,6 +603,7 @@ void setup_tissue( void )
                         // pCell = create_cell(KRAS_negative);
                         pCell = create_cell( *pKRAS_neg );
                         pCell->assign_position( positions[i] );
+                        pCell->functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
                     }
 			    }
 			}
@@ -609,6 +618,9 @@ void setup_tissue( void )
         // phenotype.molecular.internalized_total_substrates[i_Lac] = pCell->custom_data[i_Lac_i]*cell_volume;
     //    freeRRCData (result);
 }
+
+
+
 
 std::vector<std::string> my_coloring_function( Cell* pCell )
 {
@@ -847,7 +859,7 @@ void simulate_SBML_for_all_cells(void)
     }
 } 
 
-void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt )
+void tumor_energy_update_function_KRAS_positive( Cell* pCell, Phenotype& phenotype , double dt )
 {
 /* 	static int Start_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model);
 	static int End_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model );
@@ -862,13 +874,71 @@ void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt
 		return; 
     } */
     static int lactate_index = microenvironment.find_density_index( "lactate" ); 
-    double lactate_threshold = 0.05;
+    double lactate_threshold = pCell->custom_data["lactate_threshold"];
+    
+    if( pCell->phenotype.death.dead == false && pCell->type == 3 )
+    { 
+        if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
+        {
+            std::cout << "Dyiiinnggg KRAS_pos" << std::endl;
+            pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
+        }
+    }
+    
+	return;
+}
+
+void tumor_energy_update_function_KRAS_negative( Cell* pCell, Phenotype& phenotype , double dt )
+{
+/* 	static int Start_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model);
+	static int End_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model );
+
+    double tr = phenotype.cycle.data.transition_rate( Start_index,End_index ); */
+    //double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
+    //std::cout << pCell->custom_data[i_Oxy_i] << std::endl;
+    static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
+/*     if( pCell->phenotype.death.dead == true )
+    {
+        pCell->functions.custom_cell_rule = NULL; 
+		return; 
+    } */
+    static int lactate_index = microenvironment.find_density_index( "lactate" ); 
+    double lactate_threshold = pCell->custom_data["lactate_threshold"];
+    
+    if( pCell->phenotype.death.dead == false && pCell->type == 2 )
+    { 
+        if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
+        {
+            std::cout << "Dyiiinnggg KRAS_neg" << std::endl;
+            pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
+        }
+    }
+    
+	return;
+}
+
+void tumor_energy_update_function_fibroblast( Cell* pCell, Phenotype& phenotype , double dt )
+{
+/* 	static int Start_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model);
+	static int End_index = live.find_phase_index( PhysiCell_constants::live_cells_cycle_model );
+
+    double tr = phenotype.cycle.data.transition_rate( Start_index,End_index ); */
+    //double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
+    //std::cout << pCell->custom_data[i_Oxy_i] << std::endl;
+    static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
+/*     if( pCell->phenotype.death.dead == true )
+    {
+        pCell->functions.custom_cell_rule = NULL; 
+		return; 
+    } */
+    static int lactate_index = microenvironment.find_density_index( "lactate" ); 
+    double lactate_threshold = pCell->custom_data["lactate_threshold"];
     
     if( pCell->phenotype.death.dead == false && pCell->type == 1 )
     { 
         if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
         {
-            std::cout << "Dyiiinnggg" << std::endl;
+            std::cout << "Dyiiinnggg fibro" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
     }

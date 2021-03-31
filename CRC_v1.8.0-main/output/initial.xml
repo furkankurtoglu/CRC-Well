@@ -11,9 +11,9 @@
 		</software>
 		<citation />
 		<current_time units="min">0.000000</current_time>
-		<current_runtime units="sec">3.906771</current_runtime>
-		<created>2021-03-16T20:34:23Z</created>
-		<last_modified>2021-03-16T20:34:23Z</last_modified>
+		<current_runtime units="sec">3.886179</current_runtime>
+		<created>2021-03-31T13:22:34Z</created>
+		<last_modified>2021-03-31T13:22:34Z</last_modified>
 	</metadata>
 	<microenvironment>
 		<domain name="microenvironment">
@@ -95,6 +95,7 @@
 							<label index="30" size="1">glutamine_i_conc</label>
 							<label index="31" size="1">lactate_i_conc</label>
 							<label index="32" size="1">energy</label>
+							<label index="33" size="1">lactate_threshold</label>
 						</labels>
 						<filename>initial_cells_physicell.mat</filename>
 					</simplified_data>

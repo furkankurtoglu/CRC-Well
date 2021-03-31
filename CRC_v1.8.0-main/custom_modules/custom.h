@@ -95,3 +95,7 @@ std::vector<std::vector<double>> create_cell_sphere_positions(double cell_radius
 void tumor_cell_phenotype_with_oncoprotein( Cell* pCell, Phenotype& phenotype, double dt ); 
 void simulate_SBML_for_cell( Cell* pCell, Phenotype& phenotype, double dt );
 void simulate_SBML_for_all_cells(void);
+
+void tumor_energy_update_function_fibroblast( Cell* pCell, Phenotype& phenotype , double dt );
+void tumor_energy_update_function_KRAS_positive( Cell* pCell, Phenotype& phenotype , double dt );
+void tumor_energy_update_function_KRAS_negative( Cell* pCell, Phenotype& phenotype , double dt ); 

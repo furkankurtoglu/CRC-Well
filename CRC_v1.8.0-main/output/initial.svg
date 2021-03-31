@@ -17,7 +17,7 @@
   </text>
   <text x="12.8" y="58.88"
    font-family="Arial" font-size="24.32" fill="black" >
-   48088 agents
+   48199 agents
   </text>
  <g id="tissue" 
     transform="translate(0,1095.68) scale(1,-1)">
@@ -329,7 +329,7 @@
   </text>
   <text x="25.6" y="1070.08"
    font-family="Arial" font-size="19.2" fill="black" >
-   0 days, 0 hours, 0 minutes, and 5.1401 seconds
+   0 days, 0 hours, 0 minutes, and 4.8619 seconds
   </text>
   <rect x="0" y="71.68" width="5760" height="1024" stroke-width="2.048" stroke="rgb(0,0,0)" fill="none"/>
 </svg>
