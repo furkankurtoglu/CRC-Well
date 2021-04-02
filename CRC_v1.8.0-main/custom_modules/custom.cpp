@@ -548,7 +548,7 @@ void setup_tissue( void )
 
                 int num_kras_pos_organoids = parameters.doubles("percent_KRAS_positive") * number_of_organoids;
                 std::cout << "  num_kras_pos_organoids = " << num_kras_pos_organoids  << std::endl;
-                
+
                 for (int idx = 0; idx < number_of_organoids; idx++)
                 {
                     double xrand = (rand() % 5333) - 2666;
@@ -563,7 +563,7 @@ void setup_tissue( void )
                         positions[i][2] += zrand;//(rand() % 5333) - 2666;
 
                         double num = UniformRandom();
-                        std::cout << "random number: "<< num << std::endl;
+                        
                         if (num <= parameters.doubles("percent_KRAS_positive"))
                         {
                             // pCell = create_cell(KRAS_negative);
@@ -855,7 +855,7 @@ void tumor_energy_update_function_KRAS_positive( Cell* pCell, Phenotype& phenoty
     { 
         if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
         {
-            std::cout << "Dyiiinnggg KRAS_pos" << std::endl;
+            // std::cout << "Dyiiinnggg KRAS_pos" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
     }
@@ -884,7 +884,7 @@ void tumor_energy_update_function_KRAS_negative( Cell* pCell, Phenotype& phenoty
     { 
         if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
         {
-            std::cout << "Dyiiinnggg KRAS_neg" << std::endl;
+            // std::cout << "Dyiiinnggg KRAS_neg" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
     }
@@ -913,7 +913,7 @@ void tumor_energy_update_function_fibroblast( Cell* pCell, Phenotype& phenotype 
     { 
         if( pCell->nearest_density_vector()[lactate_index] > lactate_threshold )
         {
-            std::cout << "Dyiiinnggg fibro" << std::endl;
+            // std::cout << "Dyiiinnggg fibro" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
     }
