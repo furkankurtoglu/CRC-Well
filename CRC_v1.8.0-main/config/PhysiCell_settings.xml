@@ -87,7 +87,7 @@
 	</domain>
 	
 	<overall>
-		<max_time units="min">8640</max_time> <!-- 6 days * 24 h * 60 min -->
+		<max_time units="min">4320</max_time> <!-- 6 days * 24 h * 60 min -->
 		<time_units>min</time_units>
 		<space_units>micron</space_units>
 	
@@ -104,7 +104,7 @@
 		<folder>output</folder> <!-- use . for root --> 
 
 		<full_data>
-			<interval units="min">1</interval>
+			<interval units="min">360</interval>
 			<enable>true</enable>
 		</full_data>
 		
@@ -178,7 +178,7 @@
 			<phenotype>
 				<cycle code="5" name="live">  
                 	<phase_transition_rates units="1/min"> 
-						<rate start_index="0" end_index="0" fixed_duration="false">0.000072</rate>
+						<rate start_index="0" end_index="0" fixed_duration="false">0.00013</rate>
 					</phase_transition_rates>
 				</cycle>
 				<death>  
@@ -375,7 +375,7 @@
 				</mechanics>
 				<death>
 					<model code="100" name="apoptosis"> 
-						<death_rate units="1/min">5e-4</death_rate>  
+						<death_rate units="1/min">0.0</death_rate>  
 					</model> 
 				</death>
 				<volume>
@@ -425,14 +425,14 @@
 		<organoid_cell_apoptosis_rate type="double" units="1/min">0.0</organoid_cell_apoptosis_rate> 
 		<organoid_cell_relative_cycle_entry_rate type="double" units="dimensionless">0.0141</organoid_cell_relative_cycle_entry_rate>
         <organoid_cell_seeding type="bool" units="none">true</organoid_cell_seeding>
-		<organoid_cell_seeding_method type="int" units="none">3</organoid_cell_seeding_method>
-        <number_of_organoids type="int" units="none">250</number_of_organoids>
+		<organoid_cell_seeding_method type="int" units="none">1</organoid_cell_seeding_method>
+        <number_of_organoids type="int" units="none">150</number_of_organoids>
 		<percent_KRAS_positive type="double" units="none">0.5</percent_KRAS_positive>
-        <initial_tumor_radius type="double" units="none">46.0</initial_tumor_radius>
+        <initial_tumor_radius type="double" units="none">30</initial_tumor_radius>
 		
         
         <fibroblast_apoptosis_rate type="double" units="1/min">0.0</fibroblast_apoptosis_rate>
-        <fibroblast_seeding type="bool" units="none">true</fibroblast_seeding>
+        <fibroblast_seeding type="bool" units="none">false</fibroblast_seeding>
 		<test_cell_seeding type="bool" units = "none">false</test_cell_seeding>
 		<create_SBML type="bool" units="none">false</create_SBML>
 		
