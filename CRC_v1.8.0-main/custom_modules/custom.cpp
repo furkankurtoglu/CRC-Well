@@ -315,7 +315,7 @@ void create_cell_types( void )
     display_cell_definitions(std::cout);
     /*fibroblast.functions.update_phenotype = tumor_energy_update_function_fibroblast; */
     /*KRAS_positive.functions.update_phenotype = tumor_energy_update_function_KRAS_positive;*/
-    /*KRAS_negative.functions.update_phenotype = tumor_energy_update_function_KRAS_negative;*/
+    KRAS_negative.functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
 	return; 
 }
 
@@ -872,12 +872,21 @@ void tumor_energy_update_function_KRAS_negative( Cell* pCell, Phenotype& phenoty
     //double i_Oxy_i = pCell->custom_data.find_variable_index( "oxygen_i_conc" );
     //std::cout << pCell->custom_data[i_Oxy_i] << std::endl;
     static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
+    static int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
+	
+    std::cout << "Kras Negative Apoptosis Rate = " << pCell->phenotype.death.rates[apoptosis_model_index] << std::endl;
+    std::cout << "Kras Negative Necrosis Rate = " << pCell->phenotype.death.rates[necrosis_model_index] << std::endl;
+	
 /*     if( pCell->phenotype.death.dead == true )
     {
         pCell->functions.custom_cell_rule = NULL; 
 		return; 
     } */
-    static int lactate_index = microenvironment.find_density_index( "lactate" ); 
+	
+	
+	// Lactate-Apoptosis is disabled.
+	
+/* static int lactate_index = microenvironment.find_density_index( "lactate" ); 
     double lactate_threshold = pCell->custom_data["lactate_threshold"];
     
     if( pCell->phenotype.death.dead == false && pCell->type == 2 )
@@ -887,7 +896,7 @@ void tumor_energy_update_function_KRAS_negative( Cell* pCell, Phenotype& phenoty
             // std::cout << "Dyiiinnggg KRAS_neg" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
-    }
+    } */
     
 	return;
 }
