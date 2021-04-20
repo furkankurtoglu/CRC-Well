@@ -848,7 +848,10 @@ void tumor_energy_update_function_KRAS_positive( Cell* pCell, Phenotype& phenoty
         pCell->functions.custom_cell_rule = NULL; 
 		return; 
     } */
-    static int lactate_index = microenvironment.find_density_index( "lactate" ); 
+	
+	
+	// Apoptosis rate change is disabled.
+  /*  static int lactate_index = microenvironment.find_density_index( "lactate" ); 
     double lactate_threshold = pCell->custom_data["lactate_threshold"];
     
     if( pCell->phenotype.death.dead == false && pCell->type == 3 )
@@ -858,7 +861,7 @@ void tumor_energy_update_function_KRAS_positive( Cell* pCell, Phenotype& phenoty
             // std::cout << "Dyiiinnggg KRAS_pos" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
-    }
+    } */
     
 	return;
 }
@@ -915,6 +918,10 @@ void tumor_energy_update_function_fibroblast( Cell* pCell, Phenotype& phenotype 
         pCell->functions.custom_cell_rule = NULL; 
 		return; 
     } */
+	
+	
+    // Apoptosis rate change is disabled.
+	/*
     static int lactate_index = microenvironment.find_density_index( "lactate" ); 
     double lactate_threshold = pCell->custom_data["lactate_threshold"];
     
@@ -925,7 +932,7 @@ void tumor_energy_update_function_fibroblast( Cell* pCell, Phenotype& phenotype 
             // std::cout << "Dyiiinnggg fibro" << std::endl;
             pCell->phenotype.death.rates[apoptosis_model_index] = 0.01;
         }
-    }
+    } */
     
 	return;
 }
