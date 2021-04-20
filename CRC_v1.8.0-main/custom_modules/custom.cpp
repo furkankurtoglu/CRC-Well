@@ -315,7 +315,7 @@ void create_cell_types( void )
     display_cell_definitions(std::cout);
     /*fibroblast.functions.update_phenotype = tumor_energy_update_function_fibroblast; */
     /*KRAS_positive.functions.update_phenotype = tumor_energy_update_function_KRAS_positive;*/
-    KRAS_negative.functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
+    //KRAS_negative.functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
 	return; 
 }
 
