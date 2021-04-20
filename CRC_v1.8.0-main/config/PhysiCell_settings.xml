@@ -185,7 +185,7 @@
 					<model code="100" name="apoptosis"> 
 						<death_rate units="1/min">0</death_rate> <!-- 5.31667e-05 --> 
 						<phase_transition_rates units="1/min">
-							<rate start_index="0" end_index="1" fixed_duration="true">0.00193798</rate>
+							<rate start_index="0" end_index="1" fixed_duration="true">0.0</rate>
 						</phase_transition_rates>
 						<parameters>
 							<unlysed_fluid_change_rate units="1/min">0.05</unlysed_fluid_change_rate>
@@ -200,8 +200,8 @@
 					<model code="101" name="necrosis">
 						<death_rate units="1/min">0.0</death_rate>
 						<phase_transition_rates units="1/min">
-							<rate start_index="0" end_index="1" fixed_duration="false">9e9</rate>
-							<rate start_index="1" end_index="2" fixed_duration="true">1.15741e-5</rate>
+							<rate start_index="0" end_index="1" fixed_duration="false">0.0</rate>
+							<rate start_index="1" end_index="2" fixed_duration="true">0.0</rate>
 						</phase_transition_rates>
 						<parameters>
 							<unlysed_fluid_change_rate units="1/min">0.05</unlysed_fluid_change_rate>
