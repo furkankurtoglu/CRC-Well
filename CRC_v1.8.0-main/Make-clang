@@ -117,6 +117,8 @@ all: main.cpp $(ALL_OBJECTS)
 	@echo
 	@echo created $(PROGRAM_NAME)
 	@echo
+	rm -rf $(PROGRAM_NAME).dSYM
+	export DYLD_LIBRARY_PATH=/Users/kalikonstantinopoulos/libroadrunner/roadrunner-osx-10.9-cp36m/lib
 
 
 # PhysiCell core components	
