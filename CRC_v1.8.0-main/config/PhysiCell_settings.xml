@@ -425,10 +425,10 @@
 		<organoid_cell_apoptosis_rate type="double" units="1/min">0.0</organoid_cell_apoptosis_rate> 
 		<organoid_cell_relative_cycle_entry_rate type="double" units="dimensionless">0.0141</organoid_cell_relative_cycle_entry_rate>
         <organoid_cell_seeding type="bool" units="none">true</organoid_cell_seeding>
-		<organoid_cell_seeding_method type="int" units="none">1</organoid_cell_seeding_method>
-        <number_of_organoids type="int" units="none">150</number_of_organoids>
+		<organoid_cell_seeding_method type="int" units="none">2</organoid_cell_seeding_method>
+        <number_of_organoids type="int" units="none">1.0</number_of_organoids>
 		<percent_KRAS_positive type="double" units="none">0.5</percent_KRAS_positive>
-        <initial_tumor_radius type="double" units="none">30</initial_tumor_radius>
+        <initial_tumor_radius type="double" units="none">153.0</initial_tumor_radius>
 		
         
         <fibroblast_apoptosis_rate type="double" units="1/min">0.0</fibroblast_apoptosis_rate>
