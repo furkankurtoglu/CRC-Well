@@ -877,8 +877,8 @@ void tumor_energy_update_function_KRAS_negative( Cell* pCell, Phenotype& phenoty
     static int apoptosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Apoptosis" );
     static int necrosis_model_index = cell_defaults.phenotype.death.find_death_model_index( "Necrosis" );
 	
-    std::cout << "Kras Negative Apoptosis Rate = " << pCell->phenotype.death.rates[apoptosis_model_index] << std::endl;
-    std::cout << "Kras Negative Necrosis Rate = " << pCell->phenotype.death.rates[necrosis_model_index] << std::endl;
+    // std::cout << "Kras Negative Apoptosis Rate = " << pCell->phenotype.death.rates[apoptosis_model_index] << std::endl;
+    // std::cout << "Kras Negative Necrosis Rate = " << pCell->phenotype.death.rates[necrosis_model_index] << std::endl;
 	
 /*     if( pCell->phenotype.death.dead == true )
     {

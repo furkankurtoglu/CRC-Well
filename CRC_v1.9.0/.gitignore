@@ -1,0 +1,8 @@
+/.vscode
+/output/out*.xml
+/output/out*.mat
+/output/snap*.svg
+*.o
+crc
+crc.exe
+.DS_Store
