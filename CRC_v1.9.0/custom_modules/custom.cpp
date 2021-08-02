@@ -504,19 +504,19 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         // vptr->Data[SBML_idx_glutamine] = pCell->custom_data[i_Glt_i];
         // vptr->Data[SBML_idx_energy] = pCell->custom_data[energy_vi];
 
-        int retval;
-        retval = pCell->phenotype.intracellular->set_parameter_value("Oxygen", pCell->custom_data[i_Oxy_i]);
-        retval = pCell->phenotype.intracellular->set_parameter_value("Glucose", pCell->custom_data[i_Glu_i]);
-        retval = pCell->phenotype.intracellular->set_parameter_value("Lactate", pCell->custom_data[i_Lac_i]);
-        retval = pCell->phenotype.intracellular->set_parameter_value("Glutamine", pCell->custom_data[i_Glt_i]);
-        retval = pCell->phenotype.intracellular->set_parameter_value("Energy", pCell->custom_data[energy_vi]);
+        
+        pCell->phenotype.intracellular->set_parameter_value("Oxygen", pCell->custom_data[i_Oxy_i]);
+        pCell->phenotype.intracellular->set_parameter_value("Glucose", pCell->custom_data[i_Glu_i]);
+        pCell->phenotype.intracellular->set_parameter_value("Lactate", pCell->custom_data[i_Lac_i]);
+        pCell->phenotype.intracellular->set_parameter_value("Glutamine", pCell->custom_data[i_Glt_i]);
+        pCell->phenotype.intracellular->set_parameter_value("Energy", pCell->custom_data[energy_vi]);
         
         // rrc::setFloatingSpeciesConcentrations(pCell->phenotype.molecular.model_rr, vptr);
         
         //std::cout << "Before Simulation Glucose: " << vptr->Data[SBML_idx_glucose] << std::endl;
         // SBML Simulation
         // result = rrc::simulateEx (pCell->phenotype.molecular.model_rr, 0, 0.01, 2);  // start time, end time, and number of points
-        retval = pCell->phenotype.intracellular->update();
+        pCell->phenotype.intracellular->update();
         
         //std::cout << result->ColumnHeaders[0] << result->Data[6] << std::endl;
         //std::cout << "After Simulation Energy: " << result->Data[8] << std::endl;
@@ -542,11 +542,11 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         // pCell->custom_data[i_Lac_i] = result->Data[10];
         // pCell->custom_data[i_Glt_i] = result->Data[11];
 
-        pCell->custom_data[i_Glu_i] = pCell->phenotype.intracellular->get_double_parameter_value("Glucose");
-        pCell->custom_data[i_Oxy_i] = pCell->phenotype.intracellular->get_double_parameter_value("Oxygen");
-        pCell->custom_data[energy_vi] = pCell->phenotype.intracellular->get_double_parameter_value("Energy");
-        pCell->custom_data[i_Lac_i] = pCell->phenotype.intracellular->get_double_parameter_value("Lactate");
-        pCell->custom_data[i_Glt_i] = pCell->phenotype.intracellular->get_double_parameter_value("Glutamine");
+        pCell->custom_data[i_Glu_i] = pCell->phenotype.intracellular->get_parameter_value("Glucose");
+        pCell->custom_data[i_Oxy_i] = pCell->phenotype.intracellular->get_parameter_value("Oxygen");
+        pCell->custom_data[energy_vi] = pCell->phenotype.intracellular->get_parameter_value("Energy");
+        pCell->custom_data[i_Lac_i] = pCell->phenotype.intracellular->get_parameter_value("Lactate");
+        pCell->custom_data[i_Glt_i] = pCell->phenotype.intracellular->get_parameter_value("Glutamine");
         
         
         phenotype.molecular.internalized_total_substrates[i_Glu] = pCell->custom_data[i_Glu_i]*cell_volume;
@@ -585,21 +585,21 @@ void simulate_SBML_for_cell(Cell* pCell, Phenotype& phenotype , double dt)
         
         // Setting New Values to SBML
         // vptr->Data[SBML_idx_lactate] = pCell->custom_data[i_Lac_i];
-        retval = pCell->phenotype.intracellular->set_parameter_value("Lactate", pCell->custom_data[i_Lac_i]);
+        pCell->phenotype.intracellular->set_parameter_value("Lactate", pCell->custom_data[i_Lac_i]);
         
         // rrc::setFloatingSpeciesConcentrations(pCell->phenotype.molecular.model_rr, vptr);
         
         //std::cout << "Before Simulation Glucose: " << vptr->Data[SBML_idx_glucose] << std::endl;
         // SBML Simulation
         // result = rrc::simulateEx (pCell->phenotype.molecular.model_rr, 0, 0.01, 2);  // start time, end time, and number of points
-        retval = pCell->phenotype.intracellular->update();
+        pCell->phenotype.intracellular->update();
  
         //std::cout << result->ColumnHeaders[1] << result->Data[3] << std::endl;
         //std::cout << "After Simulation Energy: " << result->Data[8] << std::endl;
         // Result Indicing!!!!!
         //std::cout << "Energy: " << pCell->custom_data[energy_vi] << std::endl;
         // pCell->custom_data[i_Lac_i] = result->Data[3];
-        pCell->custom_data[i_Lac_i] = pCell->phenotype.intracellular->get_double_parameter_value("Lactate");
+        pCell->custom_data[i_Lac_i] = pCell->phenotype.intracellular->get_parameter_value("Lactate");
 
         phenotype.molecular.internalized_total_substrates[i_Lac] = pCell->custom_data[i_Lac_i]*cell_volume;
     //    freeRRCData (result);
