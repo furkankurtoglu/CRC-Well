@@ -250,7 +250,6 @@
 						<use_2D>true</use_2D>
 					</options>
 				</motility>
-
 				<secretion>
                     <substrate name="oxygen">
 						<secretion_rate units="1/min">0</secretion_rate>
@@ -277,12 +276,16 @@
 						<net_export_rate units="total substrate/min">0</net_export_rate> 
 					</substrate> 
 				</secretion>
-                <intracellular type="roadrunner">
-					<sbml_filename>./config/CAF_Toy_Model.xml</sbml_filename>
-                    <species substrate="lactate">Lactate</species>
+				<intracellular type="roadrunner">
+					<sbml_filename>./config/Toy_Metabolic_Model.xml</sbml_filename>
+                    <intracellular_dt>0.01</intracellular_dt>
+                    <map PC_substrate="oxygen" sbml_species="Oxygen"></map >
+					<map PC_substrate="glucose" sbml_species="Glucose"></map >
+					<map PC_substrate="glutamine" sbml_species="Glutamine"></map >
+                    <map PC_substrate="lactate" sbml_species="Lactate"></map >
 				</intracellular>
 			</phenotype>
-			<custom_data>
+            <custom_data>
 				<organoid_number units="dimensionless">0.0</organoid_number>
 				<oxygen_i_conc units="mmHg">0.0</oxygen_i_conc>
 				<glucose_i_conc units="mMolar">0.0</glucose_i_conc>
@@ -290,6 +293,11 @@
 				<lactate_i_conc units="mMolar">0.0</lactate_i_conc>
 				<energy units="a.u">0.0</energy>
 				<lactate_threshold units = "mMolar">0.00001</lactate_threshold>
+				<intra_oxy units="mmHg">0.0</intra_oxy>
+                <intra_glc units="mM">0.0</intra_glc>
+				<intra_glu units="mM">0.0</intra_glu>
+                <intra_lac units="mM">0.0</intra_lac>
+                <intra_energy units="dimensionless">0.0</intra_energy>
 			</custom_data>
 		</cell_definition>
 	

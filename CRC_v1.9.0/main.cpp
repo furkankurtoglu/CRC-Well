@@ -103,6 +103,13 @@ int main( int argc, char* argv[] )
 	
 	// time setup 
 	std::string time_units = "min"; 
+	
+	
+	// intracellular_dt
+	double intracellular_dt = 0.01;
+    double last_intracellular_time  = 0.0; 
+    double intracellular_dt_tolerance = 0.001 * intracellular_dt; 
+    double next_intracellular_update = intracellular_dt; 
 
 	/* Microenvironment setup */ 
 	
@@ -110,7 +117,7 @@ int main( int argc, char* argv[] )
 	
     // START -------- 1D Microenvironment ------------- START //
     
-/*     Microenvironment coarse_well;
+    Microenvironment coarse_well;
     Microenvironment old_coarse_well;
     Microenvironment new_coarse_well;
     
@@ -161,7 +168,7 @@ int main( int argc, char* argv[] )
        microenvironment(n)[2]=coarse_well(n)[2]; // glutamine
        microenvironment(n)[3]=coarse_well(n)[3]; // lactate
     }    
-     */
+    
     //setup_1D_microenvironment();
     //update_coarse_microenvironment();
     
@@ -382,7 +389,11 @@ int main( int argc, char* argv[] )
 			// run PhysiCell 
 			((Cell_Container *)microenvironment.agent_container)->update_all_cells( PhysiCell_globals.current_time );
             if (parameters.bools("create_SBML")) {
-                simulate_SBML_for_all_cells();
+                 if( PhysiCell_globals.current_time >= next_intracellular_update )
+				{
+					update_intracellular();
+					next_intracellular_update += intracellular_dt; 
+				}
             }
 			
             

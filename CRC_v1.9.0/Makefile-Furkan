@@ -2,35 +2,28 @@ VERSION := $(shell grep . VERSION.txt | cut -f1 -d:)
 PROGRAM_NAME := crc
 
 CC := g++
-# CC := g++-mp-7 # typical macports compiler name
-# CC := g++-7 # typical homebrew compiler name 
 
 # Check for environment definitions of compiler 
-# e.g., on CC = g++-7 on OSX
+# e.g., on CC = g++-10 on OSX
 ifdef PHYSICELL_CPP 
 	CC := $(PHYSICELL_CPP)
 endif
 
-
 ARCH := native # best auto-tuning 
 
-# CFLAGS := -march=$(ARCH) -Ofast -s -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
-# CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11 
-# CFLAGS := -march=$(ARCH) -g  -fomit-frame-pointer -Xpreprocessor -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-# CFLAGS := -march=$(ARCH) -g  -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-# CFLAGS := -march=$(ARCH) -fomit-frame-pointer -Xpreprocessor -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-#CFLAGS := -march=$(ARCH) -O3  -fomit-frame-pointer -Xpreprocessor -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-
+CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D ADDON_ROADRUNNER
 
 OSFLAG 	:=
 ifeq ($(OS),Windows_NT)
 	OSFLAG += -D WIN32
 	OMP_LIB := 
-	LIBRR_DIR := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m
-	LIBRR_LIBS := C:\Users\furkan\libroadrunner\roadrunner-win64-vs14-cp35m\bin
-	LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
-	#CFLAGS := -march=$(ARCH) -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
+#	LIBRR_DIR := C:\Users\heiland\libroadrunner\roadrunner-win64-vs14-cp35m
+#	LIBRR_LIBS := C:\Users\heiland\libroadrunner\roadrunner-win64-vs14-cp35m/bin
+#	LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
+#	CFLAGS := -march=$(ARCH) -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D ADDON_ROADRUNNER 
+	LIBRR_DIR := .\addons\libRoadrunner\roadrunner
+	LIBRR_CFLAGS := -I${LIBRR_DIR}\include\rr\C
+	LIBRR_LIBS := ${LIBRR_DIR}\lib
 	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
 		OSFLAG += -D AMD64
 	endif
@@ -42,36 +35,35 @@ else
 	ifeq ($(UNAME_S),Linux)
 		OSFLAG += -D LINUX
 		OMP_LIB :=
-		LIBRR_DIR := $(HOME)/libroadrunner/libroadrunner
+#		LIBRR_DIR := $(shell pwd)/intracellular_libs/roadrunner
+		LIBRR_DIR := ./addons/libRoadrunner/roadrunner
 		LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
 		LIBRR_LIBS := ${LIBRR_DIR}/lib
-		# CFLAGS := -march=$(ARCH) -g  -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-		CFLAGS := -march=$(ARCH) -fomit-frame-pointer -m64 -std=c++11 -D LIBROADRUNNER 
 	endif
 	ifeq ($(UNAME_S),Darwin)
-#		CC := clang++
 		OSFLAG += -D OSX
-		LIBRR_DIR := $(HOME)/libroadrunner/roadrunner-osx-10.9-cp36m
+		LIBRR_DIR := ./addons/libRoadrunner/roadrunner
 		LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
 		LIBRR_LIBS := ${LIBRR_DIR}/lib
 	endif
-		UNAME_P := $(shell uname -p)
-	ifeq ($(UNAME_P),x86_64)
-		OSFLAG += -D AMD64
-		LIBRR_DIR := $(HOME)/libroadrunner/libroadrunner
-		LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
-		# CFLAGS := -march=$(ARCH) -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-		CFLAGS := -march=$(ARCH) -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
-	endif
-		ifneq ($(filter %86,$(UNAME_P)),)
-	OSFLAG += -D IA32
-		endif
-	ifneq ($(filter arm%,$(UNAME_P)),)
-		OSFLAG += -D ARM
-	endif
+
+#	 Not sure if useful later or not.
+#	UNAME_P := $(shell uname -p)
+#	ifeq ($(UNAME_P),x86_64)
+#		OSFLAG += -D AMD64
+#		LIBRR_DIR := $(shell pwd)/intracellular_libs/roadrunner
+#		LIBRR_CFLAGS := -I${LIBRR_DIR}/include/rr/C
+#		# CFLAGS := -march=$(ARCH) -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D LIBROADRUNNER 
+#		CFLAGS := -march=$(ARCH) -fomit-frame-pointer -fopenmp -m64 -std=c++11 -D ADDON_ROADRUNNER 
+#	endif
+#	ifneq ($(filter %86,$(UNAME_P)),)
+#		OSFLAG += -D IA32
+#	endif
+#	ifneq ($(filter arm%,$(UNAME_P)),)
+#		OSFLAG += -D ARM
+#	endif
 endif
 
-#COMPILE_COMMAND := $(CC) $(CFLAGS) 
 COMPILE_COMMAND := $(CC) $(CFLAGS) $(LIBRR_CFLAGS) 
 
 BioFVM_OBJECTS := BioFVM_vector.o BioFVM_mesh.o BioFVM_microenvironment.o BioFVM_solvers.o BioFVM_matlab.o \
@@ -84,33 +76,29 @@ PhysiCell_module_OBJECTS := PhysiCell_SVG.o PhysiCell_pathology.o PhysiCell_Mult
 PhysiCell_pugixml.o PhysiCell_settings.o
 
 # put your custom objects here (they should be in the custom_modules directory)
-
 PhysiCell_custom_module_OBJECTS := custom.o 
 
 pugixml_OBJECTS := pugixml.o
 
+ROADRUNNER_OBJECTS := librr_intracellular.o 
+
 PhysiCell_OBJECTS := $(BioFVM_OBJECTS)  $(pugixml_OBJECTS) $(PhysiCell_core_OBJECTS) $(PhysiCell_module_OBJECTS)
-ALL_OBJECTS := $(PhysiCell_OBJECTS) $(PhysiCell_custom_module_OBJECTS)
+ALL_OBJECTS := $(PhysiCell_OBJECTS) $(PhysiCell_custom_module_OBJECTS) $(ROADRUNNER_OBJECTS)
 
 # compile the project 
 
 #all: main.cpp $(ALL_OBJECTS)
 #	$(COMPILE_COMMAND) -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp 
 
-all: main.cpp $(ALL_OBJECTS)
+all: libRoadrunner main.cpp $(ALL_OBJECTS)
 	@echo Your OS= $(OSFLAG)
 	@echo LIBRR_CFLAGS= $(LIBRR_CFLAGS)
 	@echo LIBRR_LIBS= $(LIBRR_LIBS)
 	@echo 
-#	$(COMPILE_COMMAND) -L$(LIBRR_LIBS) -lroadrunner_c_api $(PATH_TO_OMP) -lomp -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp
-#	$(COMPILE_COMMAND) -L$(LIBRR_LIBS) -lroadrunner_c_api $(OMP_LIB) -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp
 	$(COMPILE_COMMAND) $(OMP_LIB) -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp -L$(LIBRR_LIBS) -lroadrunner_c_api
-#	$(COMPILE_COMMAND) $(PATH_TO_OMP) -lomp -o $(PROGRAM_NAME) $(ALL_OBJECTS) main.cpp -L$(LIBRR_LIBS) -lroadrunner_c_api
 	@echo
 	@echo created $(PROGRAM_NAME)
 	@echo
-	#rm -rf $(PROGRAM_NAME).dSYM
-	#export DYLD_LIBRARY_PATH=/Users/kalikonstantinopoulos/libroadrunner/roadrunner-osx-10.9-cp36m/lib
 
 
 # PhysiCell core components	
@@ -193,9 +181,19 @@ PhysiCell_settings.o: ./modules/PhysiCell_settings.cpp
 	
 # user-defined PhysiCell modules
 
-#custom.o: ./custom_modules/custom.cpp ./intracellular/PhysiCell_intracellular.h
+libRoadrunner: 
+ifeq ($(OS), Windows_NT)
+	python beta/setup_libroadrunner.py
+else
+	python3 beta/setup_libroadrunner.py
+endif
+
 custom.o: ./custom_modules/custom.cpp 
 	$(COMPILE_COMMAND) -c ./custom_modules/custom.cpp
+
+librr_intracellular.o: ./addons/libRoadrunner/src/librr_intracellular.cpp ./addons/libRoadrunner/src/librr_intracellular.h
+	$(COMPILE_COMMAND) -c ./addons/libRoadrunner/src/librr_intracellular.cpp
+
 
 # cleanup
 	
@@ -212,7 +210,16 @@ data-cleanup:
 	touch ./output/empty.txt
 
 reset:
-	cp ./config/PhysiCell_settings.xml-default ./config/PhysiCell_settings.xml 
+	rm -f *.cpp 
+	cp ./sample_projects/Makefile-default Makefile 
+	rm -f ./custom_modules/*
+	touch ./custom_modules/empty.txt 
+	touch ALL_CITATIONS.txt 
+	touch ./core/PhysiCell_cell.cpp
+	rm ALL_CITATIONS.txt 
+	cp ./config/PhysiCell_settings-backup.xml ./config/PhysiCell_settings.xml 
+	touch ./config/empty.csv
+	rm ./config/*.csv	
 	
 FOLDER := output
 FRAMERATE := 24
