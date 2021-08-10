@@ -6,3 +6,5 @@
 crc
 crc.exe
 .DS_Store
+/addons/libRoadrunner/roadrunner
+/addons/libRoadrunner/roadrunner-win64-vs14-cp35m.zip

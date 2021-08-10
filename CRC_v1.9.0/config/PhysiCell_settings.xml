@@ -287,11 +287,6 @@
 			</phenotype>
             <custom_data>
 				<organoid_number units="dimensionless">0.0</organoid_number>
-				<oxygen_i_conc units="mmHg">0.0</oxygen_i_conc>
-				<glucose_i_conc units="mMolar">0.0</glucose_i_conc>
-				<glutamine_i_conc units="mMolar">0.0</glutamine_i_conc>
-				<lactate_i_conc units="mMolar">0.0</lactate_i_conc>
-				<energy units="a.u">0.0</energy>
 				<lactate_threshold units = "mMolar">0.00001</lactate_threshold>
 				<intra_oxy units="mmHg">0.0</intra_oxy>
                 <intra_glc units="mM">0.0</intra_glc>
