@@ -93,8 +93,7 @@ void tumor_energy_update_function( Cell* pCell, Phenotype& phenotype , double dt
 std::vector<std::string> my_coloring_function( Cell* );
 std::vector<std::vector<double>> create_cell_sphere_positions(double cell_radius, double sphere_radius);
 void tumor_cell_phenotype_with_oncoprotein( Cell* pCell, Phenotype& phenotype, double dt ); 
-void simulate_SBML_for_cell( Cell* pCell, Phenotype& phenotype, double dt );
-void simulate_SBML_for_all_cells(void);
+void update_intracellular();
 
 void tumor_energy_update_function_fibroblast( Cell* pCell, Phenotype& phenotype , double dt );
 void tumor_energy_update_function_KRAS_positive( Cell* pCell, Phenotype& phenotype , double dt );

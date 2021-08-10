@@ -457,27 +457,18 @@ void update_intracellular()
             double lac_val_int = (*all_cells)[i]->phenotype.molecular.internalized_total_substrates[lactate_substrate_index]/cell_volume;
 
             
-            //std::cout << "Intracellular Oxygen : " <<(*all_cells)[i]->phenotype.molecular.internalized_total_substrates[oxygen_substrate_index]/cell_volume << "    Extracellular Oxygen : " <<  oxy_val << std::endl;
-            //std::cout << "Intracellular Glucose : " <<(*all_cells)[i]->phenotype.molecular.internalized_total_substrates[glucose_substrate_index]/cell_volume << "    Extracellular Glucose : " <<  glu_val << std::endl;
-            //std::cout << "Intracellular Lactate : " <<(*all_cells)[i]->phenotype.molecular.internalized_total_substrates[lactate_substrate_index] << std::endl;
-            
-            
-            //std::cout << "main.cpp:  oxy_val (from substrate)= " << oxy_val << std::endl; 
-            
             // Update SBML 
             (*all_cells)[i]->phenotype.intracellular->set_parameter_value("Oxygen",oxy_val_int);
             (*all_cells)[i]->phenotype.intracellular->set_parameter_value("Glucose",glc_val_int);
 			(*all_cells)[i]->phenotype.intracellular->set_parameter_value("Glutamine",glu_val_int);
             (*all_cells)[i]->phenotype.intracellular->set_parameter_value("Lactate",lac_val_int);
             
-            //std::cout << "SBML Oxygen : " <<(*all_cells)[i]->phenotype.intracellular->get_parameter_value("Oxygen") << std::endl;
             
             // SBML Simulation
             (*all_cells)[i]->phenotype.intracellular->update();
             // Phenotype Simulation
             (*all_cells)[i]->phenotype.intracellular->update_phenotype_parameters((*all_cells)[i]->phenotype);
             
-            //std::cout << "Before Intracellular Oxygen : " <<(*all_cells)[i]->phenotype.molecular.internalized_total_substrates[oxygen_substrate_index]/cell_volume << std::endl;
             
             // Internalized Chemical Update After SBML Simulation
             (*all_cells)[i]->phenotype.molecular.internalized_total_substrates[oxygen_substrate_index] = (*all_cells)[i]->phenotype.intracellular->get_parameter_value("Oxygen") * cell_volume;
@@ -485,11 +476,6 @@ void update_intracellular()
             (*all_cells)[i]->phenotype.molecular.internalized_total_substrates[glutamine_substrate_index] = (*all_cells)[i]->phenotype.intracellular->get_parameter_value("Glutamine") * cell_volume;
             (*all_cells)[i]->phenotype.molecular.internalized_total_substrates[lactate_substrate_index] = (*all_cells)[i]->phenotype.intracellular->get_parameter_value("Lactate") * cell_volume;
             
-            //std::cout << "SBML Energy : " <<(*all_cells)[i]->phenotype.intracellular->get_parameter_value("Energy") << std::endl;
-            /* if ( (*all_cells)[i]->phenotype.intracellular->get_parameter_value("Energy") >100 )
-            {
-                std::cout << "SBML Energy : " <<(*all_cells)[i]->phenotype.intracellular->get_parameter_value("Energy") << "  - Cell position : " << (*all_cells)[i]->position << std::endl;
-            } */
             
             //Save custom data
             (*all_cells)[i]->custom_data[i_Oxy_i] = (*all_cells)[i]->phenotype.intracellular->get_parameter_value("Oxygen");
