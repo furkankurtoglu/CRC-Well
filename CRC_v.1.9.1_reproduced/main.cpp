@@ -218,14 +218,7 @@ int main( int argc, char* argv[] )
             // run SBML simulation
             double time_since_last_intracellular = PhysiCell_globals.current_time - last_intracellular_time;
             
-            if ( parameters.bools("add_SBML_Modeling") == true)
-            {
-                if( PhysiCell_globals.current_time >= next_intracellular_update )
-                {
-                    update_intracellular();
-                    next_intracellular_update += intracellular_dt; 
-                }
-            }
+
             
 			PhysiCell_globals.current_time += diffusion_dt;
 		}

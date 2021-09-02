@@ -243,7 +243,7 @@ void setup_tissue( void )
                         {
                             pCell->phenotype.intracellular->start(); // INTRACELLULAR
                         }
-                        pCell->functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
+                        //pCell->functions.update_phenotype = tumor_energy_update_function_KRAS_negative;
                     }
 			    }
             }

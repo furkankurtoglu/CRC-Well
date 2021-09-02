@@ -407,7 +407,6 @@
         
         <fibroblast_apoptosis_rate type="double" units="1/min">0.0</fibroblast_apoptosis_rate>
         <fibroblast_seeding type="bool" units="none">false</fibroblast_seeding>
-		<test_cell_seeding type="bool" units = "none">false</test_cell_seeding>
 		<add_SBML_Modeling type="bool" units="none">false</add_SBML_Modeling>
 		
 	</user_parameters>
