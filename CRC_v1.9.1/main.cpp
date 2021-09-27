@@ -133,7 +133,7 @@ int main( int argc, char* argv[] )
     coarse_well.resize_space( 100, 1 , 1 );
     
     double dx = 32;
-    coarse_well.resize_space_uniform( -512.0, 10208.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx );
+    coarse_well.resize_space_uniform( -512.0, 10208.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx ); // THIS IS NOT RIGHT!!!!!!!! VOXELS ARE NOT CUBE!
     std::vector<double> dirichlet_condition = { 38 , 0, 0, 0 };
     
     int my_voxel_index = 319;
