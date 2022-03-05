@@ -316,10 +316,10 @@
 						<uptake_rate units="1/min">0.1</uptake_rate>
 					</substrate> 
 				</secretion>
-                <intracellular type="roadrunner">
+<!--                 <intracellular type="roadrunner">
 					<sbml_filename>./config/CAF_Toy_Model.xml</sbml_filename>
                     <species substrate="lactate">Lactate</species>
-				</intracellular>
+				</intracellular> -->
 			</phenotype>
 			<custom_data>
 			</custom_data>
@@ -362,11 +362,11 @@
 						<secretion_target units="substrate density">10</secretion_target>
 					</substrate> 
 				</secretion>
-                <intracellular type="roadrunner">
+                <!-- <intracellular type="roadrunner">
 					<sbml_filename>./config/CRC_Toy_Model.xml</sbml_filename>
                     <species substrate="oxygen">Oxygen</species>
                     <species substrate="glucose">Glucose</species>
-				</intracellular>
+				</intracellular> -->
 			</phenotype>
 			<custom_data>
 			</custom_data>
@@ -403,16 +403,12 @@
                     <substrate name="glutamine">
 						<uptake_rate units="1/min">0.0005</uptake_rate>
 					</substrate> 
-                    <substrate name="lactate">
+                    <!-- <substrate name="lactate">
 						<secretion_rate units="1/min">0.005</secretion_rate>
 						<secretion_target units="substrate density">20</secretion_target>
-					</substrate> 
+					</substrate>  -->
 				</secretion>
-                <intracellular type="roadrunner">
-					<sbml_filename>./config/CRC_Toy_Model.xml</sbml_filename>
-                    <species substrate="oxygen">Oxygen</species>
-                    <species substrate="glucose">Glucose</species>
-				</intracellular>
+
 			</phenotype>
 			<custom_data>
 			</custom_data>

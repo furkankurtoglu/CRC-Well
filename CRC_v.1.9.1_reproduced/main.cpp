@@ -105,6 +105,51 @@ int main( int argc, char* argv[] )
 	/* Microenvironment setup */ 
 	
 	setup_microenvironment(); // modify this in the custom code 
+    
+    // START -------- 1D Microenvironment ------------- START //
+    
+    Microenvironment coarse_well;
+    Microenvironment old_coarse_well;
+    Microenvironment new_coarse_well;
+    
+    coarse_well.name = "coarse well";
+    coarse_well.spatial_units = "micron";
+    coarse_well.mesh.units = "micron";
+    coarse_well.time_units = "min";
+
+    coarse_well.set_density( 0 , "oxygen", "mmHg", 1e5 , 0.00 );
+    coarse_well.add_density( "glucose", "mM", 3e4 , 0.0 );
+    coarse_well.add_density( "glutamine", "mM", 3e4 , 0.0);
+    coarse_well.add_density( "lactate", "mM", 3e4 , 0.0 );
+    coarse_well.resize_space( 100, 1 , 1 );
+    
+    double dx = 32;
+    coarse_well.resize_space_uniform( -512.0, 10208.0 , -dx/2.0 , dx/2.0 , -dx/2.0 , dx/2.0 , dx );
+    std::vector<double> dirichlet_condition = { 38 , 0, 0, 0 };
+    
+    int my_voxel_index = 319;
+    coarse_well.set_substrate_dirichlet_activation(1,false);
+    coarse_well.set_substrate_dirichlet_activation(2,false);
+    coarse_well.set_substrate_dirichlet_activation(3,false);
+
+    
+    my_voxel_index = coarse_well.mesh.voxels.size()-1;
+    coarse_well.add_dirichlet_node( my_voxel_index , dirichlet_condition );
+    coarse_well.diffusion_decay_solver = diffusion_decay_solver__constant_coefficients_LOD_1D;
+    
+    for ( int m = 0; m < coarse_well.mesh.voxels.size() ; m++)
+    {
+        coarse_well(m)[0]=38; // oxygen
+        coarse_well(m)[1]=16.897255; // glucose
+        coarse_well(m)[2]=5.40;
+        coarse_well(m)[3]=0; // lactate
+        //std::cout<< "turned" << std::endl;
+    }
+    
+    coarse_well.display_information( std::cout );
+    coarse_well.write_to_matlab("output/output00000000_microenvironment1.mat");
+    
+    // END -------- 1D Microenvironment ------------- END //
 	
 	/* PhysiCell setup */ 
  	
